@@ -1,0 +1,28 @@
+{
+    "name": "codesaur/container",
+    "description": "An elegant object-oriented application development framework component for PHP 7.2 or newer",
+    "keywords": [
+        "container", "dependency injection", "psr-11",
+        "mongol", "mongolia", "mongolian", "монгол", "codesaur", "narankhuu", "coden", "кодзавр", "наранхүү"," коден",
+        "ololt", "ололт", "мөнхийн", "мөнхийн-ололт", "мөнхийн ололт", "munkhiin ololt"
+    ],
+    "homepage": "https://ololt.mn/codesaur",
+    "authors": [
+        {
+            "name": "Narankhuu",
+            "email": "codesaur@gmail.com",
+            "homepage": "https://ololt.mn/narankhuu"
+        }
+    ],
+    "require": {
+        "php": ">=7.2.0",
+        "psr/container": ">=1.0.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "codesaur\\Container\\": "src/"
+        }
+    },
+    "license": "MIT",
+    "minimum-stability": "dev"
+}
