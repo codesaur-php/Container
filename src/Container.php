@@ -4,7 +4,7 @@ namespace codesaur\Container;
 
 use Psr\Container\ContainerInterface;
 
-class Container implements ContainerInterface 
+class Container implements ContainerInterface
 {
     /**
      * {@inheritdoc}
