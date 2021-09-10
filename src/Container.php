@@ -1,24 +1,44 @@
-<?php declare(strict_types=1);
+<?php
 
 namespace codesaur\Container;
+
+use ReflectionClass;
 
 use Psr\Container\ContainerInterface;
 
 class Container implements ContainerInterface
 {
+    protected $entries = array();
+
     /**
      * {@inheritdoc}
      */
-    public function get($id)
+    public function get(string $name)
     {
-        throw new \Exception(__CLASS__ . ':' . __FUNCTION__ . ' Not implemented');
+        if (!$this->has($name)) {
+            throw new NotFoundException('Entry not found: ' . $name);
+        }
+        
+        return $this->entries[$name];
     }
     
     /**
      * {@inheritdoc}
      */
-    public function has($id)
+    public function has(string $name): bool
     {
-        throw new \Exception(__CLASS__ . ':' . __FUNCTION__ . ' Not implemented');
+        return isset($this->entries[$name]);
+    }
+    
+    public function set(string $name, array $args = [])
+    {
+        if (!class_exists($name)) {
+            throw new NotFoundException($name . ' class does not exist');
+        } elseif ($this->has($name)) {
+            throw new ContainerException(__CLASS__ . ' already contains entry named [' . $name . ']');
+        }
+        
+        $reflector = new ReflectionClass($name);
+        $this->entries[$name] = $reflector->newInstanceArgs($args);
     }
 }
