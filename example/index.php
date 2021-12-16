@@ -33,7 +33,8 @@ class Calculator
     public function sum($a, $b)
     {
         if (!is_numeric($a)
-                || !is_numeric($b)) {
+                || !is_numeric($b)
+        ) {
             throw new InvalidArgumentException('Args must be numeric values!');
         }
         return $a + $b;
