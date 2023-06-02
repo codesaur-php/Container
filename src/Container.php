@@ -8,7 +8,7 @@ use Psr\Container\ContainerInterface;
 
 class Container implements ContainerInterface
 {
-    protected $entries = array();
+    protected $entries = [];
 
     /**
      * {@inheritdoc}
