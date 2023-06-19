@@ -2,8 +2,6 @@
 
 namespace codesaur\Container\Example;
 
-use InvalidArgumentException;
-
 use codesaur\Container\Container;
 
 /* DEV: v1.2021.09.10
@@ -32,10 +30,10 @@ class Calculator
 {    
     public function sum($a, $b)
     {
-        if (!is_numeric($a)
-            || !is_numeric($b)
+        if (!\is_numeric($a)
+            || !\is_numeric($b)
         ) {
-            throw new InvalidArgumentException('Args must be numeric values!');
+            throw new \InvalidArgumentException('Args must be numeric values!');
         }
         return $a + $b;
     }

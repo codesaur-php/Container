@@ -32,7 +32,7 @@ class Container implements ContainerInterface
     
     public function set(string $name, array $args = [])
     {
-        if (!class_exists($name)) {
+        if (!\class_exists($name)) {
             throw new NotFoundException($name . ' class does not exist');
         } elseif ($this->has($name)) {
             throw new ContainerException(__CLASS__ . ' already contains entry named [' . $name . ']');
