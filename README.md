@@ -1,6 +1,6 @@
 # codesaur/container
 Хөнгөн, хурдан, PSR-11 стандартад нийцсэн **dependency injection container**.  
-Энэ багц нь Codesaur framework-ийн үндсэн бүрэлдэхүүн боловч ямар ч PHP төслөөс бие даан ашиглах боломжтой.
+Энэ багц нь codesaur framework-ийн үндсэн бүрэлдэхүүн боловч ямар ч PHP төслөөс бие даан ашиглах боломжтой.
 
 ---
 
