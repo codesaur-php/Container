@@ -81,4 +81,17 @@ class Container implements ContainerInterface
         $reflector = new ReflectionClass($name);
         $this->entries[$name] = $reflector->newInstanceArgs($args);
     }
+
+    /**
+     * Контейнерээс сервис устгах
+     *
+     * @param string $name
+     * @return void
+     */
+    public function remove(string $name): void
+    {
+        if ($this->has($name)) {
+            unset($this->entries[$name]);
+        }
+    }
 }
