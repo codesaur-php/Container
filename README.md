@@ -24,7 +24,6 @@
 - ✔ PSR-11 `ContainerInterface`-ийг хэрэгжүүлдэг  
 - ✔ Reflection ашиглан классуудаас автоматаар instance үүсгэнэ  
 - ✔ Closure / callable ашиглан services бүртгэх боломжтой  
-- ✔ Service provider дэмждэг  
 - ✔ Standalone скрипт болон бүх төрлийн PHP төсөлд ашиглахад тохиромжтой  
 - ✔ codesaur, Laravel, Symfony, Slim гэх мэтчилэн бусад ямарч PHP framework-тэй бүрэн зохицно  
 - ✔ Ямар ч гадны нэмэлт хамааралгүй
