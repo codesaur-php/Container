@@ -221,7 +221,7 @@ $container->set('log', [ $container->get(Logger::class) ]);
 Локал серверээр ажиллуулах:
 
 ```bash
-php -S localhost:9080 -t example/
+php -S localhost:9080 -t example
 ```
 
 ---
