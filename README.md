@@ -203,12 +203,6 @@ php -S localhost:9080 -t example
 
 Энэ төсөл MIT лицензтэй.
 
-```
-MIT License
-
-Copyright (c) codesaur - Narankhuu
-```
-
 ---
 
 ## Зохиогч
