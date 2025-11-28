@@ -3,8 +3,7 @@
     "description": "An elegant object-oriented application development framework component for PHP 8.2.1 or newer",
     "keywords": [
         "container", "dependency injection", "psr-11",
-        "mongol", "mongolia", "mongolian", "монгол", "codesaur", "narankhuu", "coden", "кодзавр", "наранхүү", "коден",
-        "ololt", "ололт", "мөнхийн", "мөнхийн-ололт", "мөнхийн ололт", "munkhiin ololt"
+        "mongol", "mongolia", "mongolian", "монгол", "codesaur", "narankhuu", "coden", "кодзавр", "наранхүү", "коден"
     ],
     "homepage": "https://ololt.mn/codesaur",
     "authors": [
