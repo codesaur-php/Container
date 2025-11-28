@@ -161,31 +161,6 @@ $b = $container->get(B::class);
 
 ---
 
-### Runtime үед service солих
-
-```php
-$container->remove(Database::class);
-$container->set(Database::class, ['127.0.0.1']);
-```
-
----
-
-### Dynamic arguments
-
-```php
-$container->set(Printer::class, ['Hello world!']);
-```
-
----
-
-### Simple aliasing
-
-```php
-$container->set(Logger::class);
-$container->set('log', [ $container->get(Logger::class) ]);
-```
----
-
 ### Closure / callable ашиглан service бүртгэх
 
 Container нь callable / closure-ийг дэмждэг.  
@@ -218,6 +193,31 @@ $logger = $container->get(Logger::class);
 - ✔ Дотоод хамааралтай сервисүүдийг container-аас авах боломжтой  
 - ✔ Runtime үед динамик утга хийхэд тохиромжтой  
 
+---
+
+### Runtime үед service солих
+
+```php
+$container->remove(Database::class);
+$container->set(Database::class, ['127.0.0.1']);
+```
+
+---
+
+### Dynamic arguments
+
+```php
+$container->set(Printer::class, ['Hello world!']);
+```
+
+---
+
+### Simple aliasing
+
+```php
+$container->set(Logger::class);
+$container->set('log', [ $container->get(Logger::class) ]);
+```
 ---
 
 ## Example хавтас
