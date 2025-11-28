@@ -4,7 +4,7 @@
 
 ---
 
-## 📑 Агуулга
+## Агуулга
 
 1. [Танилцуулга](#танилцуулга)
 2. [Суурилуулалт](#суурилуулалт)
@@ -220,7 +220,7 @@ $container->set('log', [ $container->get(Logger::class) ]);
 Локал серверээр ажиллуулах:
 
 ```bash
-php -S localhost:8000 -t example/
+php -S localhost:9080 -t example/
 ```
 
 ---
@@ -240,4 +240,4 @@ Copyright (c) codesaur - Narankhuu
 ## Зохиогч
 
 **Narankhuu**  
-📧 codesaur@gmail.com
+codesaur@gmail.com
