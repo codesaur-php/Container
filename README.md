@@ -9,7 +9,6 @@
 1. [Танилцуулга](#танилцуулга)
 2. [Суурилуулалт](#суурилуулалт)
 3. [Хэрэглээ](#хэрэглээ)
-4. [Service Provider](#service-provider)
 5. [API Reference](#api-reference)
 6. [Advanced Usage](#advanced-usage)
 7. [Example хавтас](#example-хавтас)
@@ -104,31 +103,6 @@ $container->has(MyService::class); // true / false
 
 ```php
 $container->remove(MyService::class);
-```
-
----
-
-## Service Provider
-
-Service provider ашиглан нэг файлд олон сервисийг бүртгэж болно.
-
-```php
-use codesaur\Container\ServiceProviderInterface;
-
-class AppServiceProvider implements ServiceProviderInterface
-{
-    public function register($container): void
-    {
-        $container->set(Logger::class);
-        $container->set(Database::class, ['localhost']);
-    }
-}
-```
-
-Бүртгэх:
-
-```php
-$container->register(new AppServiceProvider());
 ```
 
 ---
