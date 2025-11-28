@@ -26,8 +26,9 @@
 - ✔ Reflection ашиглан классуудаас автоматаар instance үүсгэнэ  
 - ✔ Closure / callable ашиглан services бүртгэх боломжтой  
 - ✔ Service provider дэмждэг  
-- ✔ Хөнгөн, хурдан, ямар ч гадны нэмэлт хамааралгүй  
-- ✔ Codesaur framework болон standalone төслүүдэд төгс тохирно  
+- ✔ codesaur, Laravel, Symfony, Slim зэрэг бусад PHP framework-тэй бүрэн зохицно  
+- ✔ Standalone скрипт болон бүх төрлийн PHP төсөлд ашиглахад тохиромжтой  
+- ✔ Ямар ч гадны нэмэлт хамааралгүй
 
 ---
 
