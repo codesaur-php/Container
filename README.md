@@ -184,6 +184,39 @@ $container->set(Printer::class, ['Hello world!']);
 $container->set(Logger::class);
 $container->set('log', [ $container->get(Logger::class) ]);
 ```
+---
+
+### Closure / callable ашиглан service бүртгэх
+
+Container нь callable / closure-ийг дэмждэг.  
+Энэ тохиолдолд сервисийг *factory function* хэлбэрээр бүртгэнэ.
+
+```php
+$container->set('config', fn() => [
+    'db_host' => 'localhost',
+    'debug'   => true,
+]);
+```
+
+Container дотор ашиглах жишээ:
+
+```php
+$container->set(Logger::class, function ($c) {
+    $cfg = $c->get('config');
+    return new Logger($cfg['db_host'], $cfg['debug']);
+});
+```
+
+Service дуудах:
+
+```php
+$logger = $container->get(Logger::class);
+```
+
+Энэ хэлбэр нь:
+- ✔ Хөнгөн **factory pattern**  
+- ✔ Дотоод хамааралтай сервисүүдийг container-аас авах боломжтой  
+- ✔ Runtime үед динамик утга хийхэд тохиромжтой  
 
 ---
 

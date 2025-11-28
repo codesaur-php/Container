@@ -62,16 +62,21 @@ class Container implements ContainerInterface
      * - Давхар бүртгэхийг хориглоно.
      * - ReflectionClass ашиглаж constructor-ын аргументуудаар instance үүсгэнэ.
      *
-     * @param string $name  Бүртгэх класс нэр
-     * @param array  $args  Класс үүсгэх constructor аргументууд
+     * @param string $name        Бүртгэх класс нэр
+     * @param mixed  $definition  Класс үүсгэх constructor аргументууд эсвэл callable Closure
      *
      * @throws NotFoundException     Класс байхгүй бол
      * @throws ContainerException    Давхар бүртгэх үед
      *
      * @return void
      */
-    public function set(string $name, array $args = [])
+    public function set(string $name, mixed $definition = [])
     {
+        if (\is_callable($definition)) {
+            $this->entries[$name] = $definition($this);
+            return;
+        }
+    
         if (!\class_exists($name)) {
             throw new NotFoundException($name . ' class does not exist');
         } elseif ($this->has($name)) {
@@ -79,7 +84,7 @@ class Container implements ContainerInterface
         }
         
         $reflector = new ReflectionClass($name);
-        $this->entries[$name] = $reflector->newInstanceArgs($args);
+        $this->entries[$name] = $reflector->newInstanceArgs($definition);
     }
 
     /**
