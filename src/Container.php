@@ -11,7 +11,7 @@ use Psr\Container\ContainerInterface;
  * Хөнгөн жинтэй dependency injection контейнер.
  * PSR-11 ContainerInterface стандартыг хэрэгжүүлдэг.
  *
- * Энэ контейнер нь зөвхөн **класс нэрээр** service бүртгэж,
+ * Энэ контейнер нь зөвхөн <b>класс нэрээр</b> service бүртгэж,
  * Reflection ашиглаж constructor-ын аргументаар instance үүсгэдэг.
  *
  * @package codesaur\Container
@@ -57,7 +57,7 @@ class Container implements ContainerInterface
      * Контейнерт шинэ сервис бүртгэх.
      *
      * Анхаарах зүйлс:
-     * - $name параметр нь заавал **класс нэр** байх ёстой.
+     * - $name параметр нь заавал <b>класс нэр</b> байх ёстой.
      * - Класс байхгүй бол NotFoundException шиднэ.
      * - Давхар бүртгэхийг хориглоно.
      * - ReflectionClass ашиглаж constructor-ын аргументуудаар instance үүсгэнэ.
