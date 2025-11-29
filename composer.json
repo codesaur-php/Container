@@ -1,16 +1,17 @@
 {
     "name": "codesaur/container",
-    "description": "An elegant object-oriented application development framework component for PHP 8.2.1 or newer",
+    "description": "Хөнгөн, хурдан, PSR-11 стандартад нийцсэн dependency injection container",
     "keywords": [
         "container", "dependency injection", "psr-11",
-        "mongol", "mongolia", "монгол", "codesaur", "narankhuu", "coden", "кодзавр", "наранхүү", "коден"
+        "mongol", "mongolia", "монгол", "codesaur",
+        "narankhuu", "coden", "кодзавр", "наранхүү", "коден"
     ],
-    "homepage": "https://ololt.mn/codesaur",
+    "homepage": "https://github.com/codesaur-php",
     "authors": [
         {
-            "name": "Narankhuu",
+            "name": "Narankhuu (+976 99000287)",
             "email": "codesaur@gmail.com",
-            "homepage": "https://ololt.mn/narankhuu"
+            "homepage": "https://github.com/codesaur"
         }
     ],
     "require": {
