@@ -45,7 +45,7 @@ class Printer
 /**
  * Class Calculator
  *
- * Энгийн тооны машин — хоёр тоог нэмэх жишээ.
+ * Энгийн тооны машин кодын жишээ: хоёр тоог нэмэх.
  * Контейнерээс resolve хийж ашиглахад тохиромжтой.
  */
 class Calculator
@@ -83,7 +83,7 @@ $container->set(Printer::class, [
 // Calculator классыг параметргүйгээр бүртгэж байна
 $container->set(Calculator::class);
 
-// Контейнерээс Calculator service-ийг авч ашиглах
+// Контейнерээс Calculator сервисийг авч ашиглах
 $a = 16;
 $b = 7;
 
