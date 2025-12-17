@@ -1,4 +1,7 @@
 # codesaur/container
+
+![CI](https://github.com/codesaur-php/Container/actions/workflows/ci.yml/badge.svg)
+
 Хөнгөн, хурдан, PSR-11 стандартад нийцсэн **dependency injection container**.  
 Энэ багц нь codesaur framework-ийн үндсэн бүрэлдэхүүн боловч ямар ч PHP төслөөс бие даан ашиглах боломжтой.
 
@@ -10,12 +13,14 @@
 2. [Суурилуулалт](#суурилуулалт)
 3. [Хэрэглээ](#хэрэглээ)
 4. [API Reference](#api-reference)
-5. [Advanced Usage](#advanced-usage)
-6. [Example хавтас](#example-хавтас)
-7. [Тест ажиллуулах](#тест-ажиллуулах)
-8. [Код шалгалт](#код-шалгалт)
-9. [Лиценз](#лиценз)
-10. [Зохиогч](#зохиогч)
+5. [Lazy Loading](#lazy-loading)
+6. [Advanced Usage](#advanced-usage)
+7. [Example хавтас](#example-хавтас)
+8. [Тест ажиллуулах](#тест-ажиллуулах)
+9. [CI/CD](#cicd)
+10. [Код шалгалт](#код-шалгалт)
+11. [Лиценз](#лиценз)
+12. [Зохиогч](#зохиогч)
 
 ---
 
@@ -115,40 +120,36 @@ $container->remove(MyService::class);
 
 ## API Reference
 
-### `set(string $name, array $args = []): void`
+### Товч танилцуулга
+
+#### `set(string $name, mixed $definition = []): void`
 - Класс бүртгэх
 - Lazy Loading: Instance одоо үүсгэгдэхгүй, зөвхөн тодорхойлолт хадгалагдана
 - Reflection ашиглан instance үүсгэнэ (get() дуудагдах үед)
 - Давхар бүртгэхийг хориглоно
 
----
-
-### `get(string $name): mixed`
+#### `get(string $name): mixed`
 - Бүртгэлтэй instance буцаана
 - Lazy Loading: Эхний удаа дуудахад instance үүсгэнэ, дараа нь кэшлэгдсэн instance буцаана
 - Байхгүй бол `NotFoundException` шиднэ
 
----
-
-### `has(string $name): bool`
+#### `has(string $name): bool`
 - Бүртгэлтэй эсэхийг шалгана
 
----
-
-### `remove(string $name): void`
+#### `remove(string $name): void`
 - Сервисийг контейнерээс устгана
 
----
+#### Exceptions
 
-### Exceptions
-
-#### `NotFoundException`
+**`NotFoundException`**
 - Бүртгэлгүй service авахыг оролдох үед
 
-#### `ContainerException`
+**`ContainerException`**
 - Давхар бүртгэх  
 - Reflection-иас алдаа гарах  
 - Бусад дотоод алдаанууд
+
+Дэлгэрэнгүй мэдээллийг [API.md](API.md) файлаас үзнэ үү. (кодын PHPDoc ба коммент дээо үндэслэн Cursor AI автоматаар үүсгэсэн)
 
 ---
 
@@ -287,9 +288,17 @@ php -S localhost:9080 -t example
 
 ## Тест ажиллуулах
 
-Энэ төсөлд PHPUnit ашиглан unit test-үүд бий. Тестүүдийг ажиллуулахын тулд:
+Энэ төсөлд PHPUnit ашиглан unit test болон integration test-үүд бий. Тестүүдийг ажиллуулахын тулд:
 
 ### 1. Composer dependencies суулгах
+
+#### Windows (PowerShell эсвэл Command Prompt)
+
+```powershell
+composer install
+```
+
+#### Linux / macOS (Terminal)
 
 ```bash
 composer install
@@ -299,24 +308,84 @@ composer install
 
 ### 2. Тест ажиллуулах
 
-Бүх тестүүдийг ажиллуулах:
+#### Windows (PowerShell)
 
-```bash
-vendor/bin/phpunit
+```powershell
+# Бүх тестүүдийг ажиллуулах
+.\vendor\bin\phpunit
+
+# Тодорхой тест файл ажиллуулах
+.\vendor\bin\phpunit tests\ContainerTest.php
+
+# Integration test ажиллуулах
+.\vendor\bin\phpunit tests\IntegrationTest.php
 ```
 
-Эсвэл тодорхой тест файл ажиллуулах:
+#### Windows (Command Prompt)
+
+```cmd
+# Бүх тестүүдийг ажиллуулах
+vendor\bin\phpunit
+
+# Тодорхой тест файл ажиллуулах
+vendor\bin\phpunit tests\ContainerTest.php
+
+# Integration test ажиллуулах
+vendor\bin\phpunit tests\IntegrationTest.php
+```
+
+#### Linux / macOS (Terminal)
 
 ```bash
+# Бүх тестүүдийг ажиллуулах
+vendor/bin/phpunit
+
+# Тодорхой тест файл ажиллуулах
 vendor/bin/phpunit tests/ContainerTest.php
+
+# Integration test ажиллуулах
+vendor/bin/phpunit tests/IntegrationTest.php
 ```
 
 ### 3. Тест coverage харах
 
-Код coverage-ийг харах:
+#### Windows (PowerShell)
+
+```powershell
+.\vendor\bin\phpunit --coverage-text
+```
+
+#### Windows (Command Prompt)
+
+```cmd
+vendor\bin\phpunit --coverage-text
+```
+
+#### Linux / macOS (Terminal)
 
 ```bash
 vendor/bin/phpunit --coverage-text
+```
+
+### 4. Тодорхой тест method ажиллуулах
+
+#### Windows (PowerShell)
+
+```powershell
+# Тодорхой тест класс дахь method ажиллуулах
+.\vendor\bin\phpunit --filter testSetAndGet tests\ContainerTest.php
+```
+
+#### Windows (Command Prompt)
+
+```cmd
+vendor\bin\phpunit --filter testSetAndGet tests\ContainerTest.php
+```
+
+#### Linux / macOS (Terminal)
+
+```bash
+vendor/bin/phpunit --filter testSetAndGet tests/ContainerTest.php
 ```
 
 ### Тестүүдийн бүтэц
@@ -324,6 +393,7 @@ vendor/bin/phpunit --coverage-text
 - `tests/ContainerTest.php` - Container классын unit test-үүд
 - `tests/ContainerExceptionTest.php` - ContainerException классын test-үүд
 - `tests/NotFoundExceptionTest.php` - NotFoundException классын test-үүд
+- `tests/IntegrationTest.php` - Integration test-үүд (бодит хэрэглээний сценариуд)
 
 Тестүүд нь дараах зүйлсийг шалгана:
 - ✅ Service бүртгэх, авах үйлдлүүд
@@ -334,12 +404,74 @@ vendor/bin/phpunit --coverage-text
 - ✅ Instance кэшлэлт (singleton behavior)
 - ✅ PSR-11 стандартын нийцтэй байдал
 - ✅ Edge case-үүд (optional parameters, no constructor, гэх мэт)
+- ✅ Integration test-үүд (бодит application сценариуд, dependency chain, service replacement, гэх мэт)
+
+---
+
+## CI/CD
+
+Энэ төсөлд GitHub Actions ашиглан CI/CD pipeline тохируулсан байна.
+
+### CI Pipeline
+
+GitHub Actions workflow нь дараах зүйлсийг гүйцэтгэнэ:
+
+- ✅ **Multi-version PHP тест**: PHP 8.2, 8.3, 8.4 дээр тест ажиллуулна
+- ✅ **Multi-platform тест**: Ubuntu болон Windows дээр тест ажиллуулна
+- ✅ **Code coverage**: Codecov руу coverage тайлан илгээнэ
+- ✅ **Syntax check**: PHP файлуудын синтакс шалгалт
+
+### CI Status
+
+CI pipeline нь дараах үйлдлүүдэд автоматаар ажиллана:
+- `main`, `master`, `develop` branch-ууд руу push хийхэд
+- Pull request үүсгэхэд
+
+CI статусыг GitHub repository-ийн Actions tab-аас харж болно.
+
+### Локал дээр CI-тэй ижил тест ажиллуулах
+
+CI дээр ажиллаж буй тестүүдийг локал дээр ажиллуулах:
+
+#### Windows (PowerShell)
+
+```powershell
+# Бүх тестүүдийг ажиллуулах
+.\vendor\bin\phpunit
+
+# Coverage-тэй ажиллуулах
+.\vendor\bin\phpunit --coverage-text
+
+# Тодорхой тест файл ажиллуулах
+.\vendor\bin\phpunit tests\IntegrationTest.php
+```
+
+#### Windows (Command Prompt)
+
+```cmd
+vendor\bin\phpunit
+vendor\bin\phpunit --coverage-text
+vendor\bin\phpunit tests\IntegrationTest.php
+```
+
+#### Linux / macOS (Terminal)
+
+```bash
+# Бүх тестүүдийг ажиллуулах
+vendor/bin/phpunit
+
+# Coverage-тэй ажиллуулах
+vendor/bin/phpunit --coverage-text
+
+# Тодорхой тест файл ажиллуулах
+vendor/bin/phpunit tests/IntegrationTest.php
+```
 
 ---
 
 ## Код шалгалт
 
-Төслийн кодын нарийвчилсан шалгалтын тайланг [CODE_REVIEW.md](CODE_REVIEW.md) файлаас харна уу.
+Төслийн кодын нарийвчилсан шалгалтын тайланг [CODE_REVIEW.md](CODE_REVIEW.md) файлаас харна уу. (Cursor AI үүсгэсэн)
 
 ---
 

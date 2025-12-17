@@ -56,6 +56,8 @@ The codebase is well-structured and follows PSR-11 standards. The implementation
 
 ## Test Coverage
 
+### Unit Tests
+
 Unit tests have been created covering:
 - ✅ Basic registration and retrieval
 - ✅ Constructor argument passing
@@ -67,6 +69,52 @@ Unit tests have been created covering:
 - ✅ Lazy loading behavior (services not instantiated until `get()` is called)
 - ✅ Instance caching (singleton behavior after first `get()`)
 
+### Integration Tests
+
+Integration tests (`tests/IntegrationTest.php`) have been added to verify the container works correctly in realistic application scenarios:
+
+- ✅ **Complete application setup**: Tests a full application bootstrap scenario with multiple interdependent services
+- ✅ **Service replacement**: Verifies removing and re-registering services works correctly
+- ✅ **Singleton behavior across services**: Ensures shared services maintain singleton pattern when used by multiple consumers
+- ✅ **Complex dependency chains**: Tests multi-level dependency resolution
+- ✅ **Mixed registration types**: Verifies class-based and callable-based registrations work together
+- ✅ **Error handling in dependency chain**: Tests proper error propagation when dependencies are missing
+- ✅ **Lazy loading in complex scenarios**: Verifies lazy loading works correctly with complex dependency relationships
+
+## CI/CD
+
+### GitHub Actions Workflow
+
+A comprehensive CI/CD pipeline has been set up using GitHub Actions (`.github/workflows/ci.yml`):
+
+**Test Job:**
+- Runs on multiple PHP versions (8.2, 8.3, 8.4)
+- Tests on both Ubuntu and Windows platforms
+- Generates code coverage reports
+- Uploads coverage to Codecov
+
+**Lint Job:**
+- Performs PHP syntax checking on all source and test files
+- Ensures code quality before merging
+
+**Triggers:**
+- Automatically runs on pushes to `main`, `master`, and `develop` branches
+- Runs on all pull requests to these branches
+
+### Benefits
+
+- ✅ **Automated testing**: All tests run automatically on every push/PR
+- ✅ **Multi-version compatibility**: Ensures code works across PHP 8.2-8.4
+- ✅ **Cross-platform support**: Verifies compatibility on Linux and Windows
+- ✅ **Code quality**: Syntax checks prevent basic errors from being merged
+- ✅ **Coverage tracking**: Codecov integration tracks test coverage over time
+
 ## Conclusion
 
 The code is production-ready and well-implemented. The design choices favor simplicity and performance, which aligns with the "lightweight container" goal stated in the README.
+
+With the addition of integration tests and CI/CD pipeline, the project now has:
+- Comprehensive test coverage (unit + integration)
+- Automated quality assurance
+- Multi-version and cross-platform compatibility verification
+- Continuous integration for reliable development workflow
