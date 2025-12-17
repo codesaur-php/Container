@@ -1,6 +1,6 @@
 # codesaur/container
 
-![CI](https://github.com/codesaur-php/Container/actions/workflows/ci.yml/badge.svg)
+![CI](https://github.com/codesaur-php/Container/workflows/CI/badge.svg)
 
 Хөнгөн, хурдан, PSR-11 стандартад нийцсэн **dependency injection container**.  
 Энэ багц нь codesaur framework-ийн үндсэн бүрэлдэхүүн боловч ямар ч PHP төслөөс бие даан ашиглах боломжтой.
@@ -149,7 +149,7 @@ $container->remove(MyService::class);
 - Reflection-иас алдаа гарах  
 - Бусад дотоод алдаанууд
 
-Дэлгэрэнгүй мэдээллийг [API.md](API.md) файлаас үзнэ үү. (кодын PHPDoc ба коммент дээо үндэслэн Cursor AI автоматаар үүсгэсэн)
+Дэлгэрэнгүй мэдээллийг [API.md](API.md) файлаас үзнэ үү. (кодын PHPDoc ба коммент дээр үндэслэн Cursor AI автоматаар үүсгэсэн)
 
 ---
 
