@@ -1,6 +1,8 @@
 # codesaur/container
 
 ![CI](https://github.com/codesaur-php/Container/workflows/CI/badge.svg)
+![PHP](https://img.shields.io/badge/PHP-%3E%3D8.2.1-777BB4?logo=php&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-green.svg)
 
 Хөнгөн, хурдан, PSR-11 стандартад нийцсэн **dependency injection container**.  
 Энэ багц нь codesaur framework-ийн үндсэн бүрэлдэхүүн боловч ямар ч PHP төслөөс бие даан ашиглах боломжтой.
@@ -149,7 +151,7 @@ $container->remove(MyService::class);
 - Reflection-иас алдаа гарах  
 - Бусад дотоод алдаанууд
 
-Дэлгэрэнгүй мэдээллийг [API.md](API.md) файлаас үзнэ үү. (кодын PHPDoc ба коммент дээр үндэслэн Cursor AI автоматаар үүсгэсэн)
+Дэлгэрэнгүй мэдээллийг [API.md](API.md) файлаас үзнэ үү. (PHPDoc-уудаас Cursor AI ашиглан автоматаар үүсгэсэн)
 
 ---
 
@@ -471,7 +473,7 @@ vendor/bin/phpunit tests/IntegrationTest.php
 
 ## Код шалгалт
 
-Төслийн кодын нарийвчилсан шалгалтын тайланг [CODE_REVIEW.md](CODE_REVIEW.md) файлаас харна уу. (Cursor AI үүсгэсэн)
+Төслийн кодын нарийвчилсан шалгалтын тайланг [CODE_REVIEW.md](CODE_REVIEW.md) файлаас харна уу. (Cursor AI ашиглан үүсгэсэн)
 
 ---
 
@@ -485,5 +487,5 @@ vendor/bin/phpunit tests/IntegrationTest.php
 
 **Narankhuu**  
 📧 codesaur@gmail.com  
-📱 +976 99000287  
+📲 [+976 99000287](https://wa.me/97699000287)  
 🌐 https://github.com/codesaur  

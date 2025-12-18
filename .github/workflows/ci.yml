@@ -79,5 +79,3 @@ jobs:
         run: |
           find src -name "*.php" -exec php -l {} \;
           find tests -name "*.php" -exec php -l {} \;
-
-
