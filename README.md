@@ -1,7 +1,7 @@
 # codesaur/container
 
 ![CI](https://github.com/codesaur-php/Container/workflows/CI/badge.svg)
-![PHP](https://img.shields.io/badge/PHP-%3E%3D8.2.1-777BB4?logo=php&logoColor=white)
+[![PHP Version](https://img.shields.io/badge/php-%5E8.2.1-777BB4.svg?logo=php)](https://www.php.net/)
 ![License](https://img.shields.io/badge/License-MIT-green.svg)
 
 Хөнгөн, хурдан, PSR-11 стандартад нийцсэн **dependency injection container**.  
