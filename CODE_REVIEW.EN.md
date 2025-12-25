@@ -1,6 +1,6 @@
 # Code Review Summary
 
-**Хэл:** [English](CODE_REVIEW.EN.md)
+**Language:** [Монгол (Mongolian)](CODE_REVIEW.md)
 
 ## Overall Assessment
 The codebase is well-structured and follows PSR-11 standards. The implementation is clean and straightforward.
@@ -122,6 +122,6 @@ With the addition of integration tests and CI/CD pipeline, the project now has:
 - Continuous integration for reliable development workflow
 
 **See Also:**
-- [README.md](README.md) / [README.EN.md](README.EN.md) - General introduction
-- [API.md](API.md) / [API.EN.md](API.EN.md) - API reference
-- [CHANGELOG.md](CHANGELOG.md) / [CHANGELOG.EN.md](CHANGELOG.EN.md) - Changelog
+- [README.EN.md](README.EN.md) / [README.md](README.md) - General introduction
+- [API.EN.md](API.EN.md) / [API.md](API.md) - API reference
+- [CHANGELOG.EN.md](CHANGELOG.EN.md) / [CHANGELOG.md](CHANGELOG.md) - Changelog

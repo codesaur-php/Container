@@ -7,6 +7,8 @@
 Хөнгөн, хурдан, PSR-11 стандартад нийцсэн **dependency injection container**.  
 Энэ багц нь codesaur framework-ийн үндсэн бүрэлдэхүүн боловч ямар ч PHP төслөөс бие даан ашиглах боломжтой.
 
+**Хэл:** [English](README.EN.md)
+
 ---
 
 ## Агуулга
@@ -21,8 +23,9 @@
 8. [Тест ажиллуулах](#тест-ажиллуулах)
 9. [CI/CD](#cicd)
 10. [Код шалгалт](#код-шалгалт)
-11. [Лиценз](#лиценз)
-12. [Зохиогч](#зохиогч)
+11. [Changelog](#changelog)
+12. [Лиценз](#лиценз)
+13. [Зохиогч](#зохиогч)
 
 ---
 
@@ -152,6 +155,8 @@ $container->remove(MyService::class);
 - Бусад дотоод алдаанууд
 
 Дэлгэрэнгүй мэдээллийг [API.md](API.md) файлаас үзнэ үү. (PHPDoc-уудаас Cursor AI ашиглан автоматаар үүсгэсэн)
+
+**English:** [API.EN.md](API.EN.md)
 
 ---
 
@@ -294,9 +299,9 @@ php -S localhost:9080 -t example
 
 ### 1. Composer dependencies суулгах
 
-#### Windows (PowerShell эсвэл Command Prompt)
+#### Windows (Command Prompt)
 
-```powershell
+```cmd
 composer install
 ```
 
@@ -309,19 +314,6 @@ composer install
 Энэ нь PHPUnit болон бусад dev dependencies-ийг суулгана.
 
 ### 2. Тест ажиллуулах
-
-#### Windows (PowerShell)
-
-```powershell
-# Бүх тестүүдийг ажиллуулах
-.\vendor\bin\phpunit
-
-# Тодорхой тест файл ажиллуулах
-.\vendor\bin\phpunit tests\ContainerTest.php
-
-# Integration test ажиллуулах
-.\vendor\bin\phpunit tests\IntegrationTest.php
-```
 
 #### Windows (Command Prompt)
 
@@ -351,12 +343,6 @@ vendor/bin/phpunit tests/IntegrationTest.php
 
 ### 3. Тест coverage харах
 
-#### Windows (PowerShell)
-
-```powershell
-.\vendor\bin\phpunit --coverage-text
-```
-
 #### Windows (Command Prompt)
 
 ```cmd
@@ -370,13 +356,6 @@ vendor/bin/phpunit --coverage-text
 ```
 
 ### 4. Тодорхой тест method ажиллуулах
-
-#### Windows (PowerShell)
-
-```powershell
-# Тодорхой тест класс дахь method ажиллуулах
-.\vendor\bin\phpunit --filter testSetAndGet tests\ContainerTest.php
-```
 
 #### Windows (Command Prompt)
 
@@ -474,6 +453,16 @@ vendor/bin/phpunit tests/IntegrationTest.php
 ## Код шалгалт
 
 Төслийн кодын нарийвчилсан шалгалтын тайланг [CODE_REVIEW.md](CODE_REVIEW.md) файлаас харна уу. (Cursor AI ашиглан үүсгэсэн)
+
+**English:** [CODE_REVIEW.EN.md](CODE_REVIEW.EN.md)
+
+---
+
+## Changelog
+
+Багцын өөрчлөлтийн түүхийг [CHANGELOG.md](CHANGELOG.md) файлаас харна уу.
+
+**English:** [CHANGELOG.EN.md](CHANGELOG.EN.md)
 
 ---
 
