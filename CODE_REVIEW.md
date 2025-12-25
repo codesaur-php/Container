@@ -1,7 +1,5 @@
 # Code Review Summary
 
-**Хэл:** [English](CODE_REVIEW.EN.md)
-
 ## Overall Assessment
 The codebase is well-structured and follows PSR-11 standards. The implementation is clean and straightforward.
 

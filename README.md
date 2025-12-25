@@ -414,19 +414,6 @@ CI статусыг GitHub repository-ийн Actions tab-аас харж бол�
 
 CI дээр ажиллаж буй тестүүдийг локал дээр ажиллуулах:
 
-#### Windows (PowerShell)
-
-```powershell
-# Бүх тестүүдийг ажиллуулах
-.\vendor\bin\phpunit
-
-# Coverage-тэй ажиллуулах
-.\vendor\bin\phpunit --coverage-text
-
-# Тодорхой тест файл ажиллуулах
-.\vendor\bin\phpunit tests\IntegrationTest.php
-```
-
 #### Windows (Command Prompt)
 
 ```cmd
@@ -453,8 +440,6 @@ vendor/bin/phpunit tests/IntegrationTest.php
 ## Код шалгалт
 
 Төслийн кодын нарийвчилсан шалгалтын тайланг [CODE_REVIEW.md](CODE_REVIEW.md) файлаас харна уу. (Cursor AI ашиглан үүсгэсэн)
-
-**English:** [CODE_REVIEW.EN.md](CODE_REVIEW.EN.md)
 
 ---
 

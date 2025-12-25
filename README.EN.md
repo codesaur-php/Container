@@ -438,9 +438,7 @@ vendor/bin/phpunit tests/IntegrationTest.php
 
 ## Code Review
 
-For detailed code review report, see [CODE_REVIEW.EN.md](CODE_REVIEW.EN.md) file. (Generated using Cursor AI)
-
-**Монгол:** [CODE_REVIEW.md](CODE_REVIEW.md)
+For detailed code review report, see [CODE_REVIEW.md](CODE_REVIEW.md) file. (Generated using Cursor AI)
 
 ---
 

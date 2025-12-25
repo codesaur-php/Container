@@ -63,10 +63,9 @@
 ## Links
 
 - [README.md](README.md) - Ерөнхий танилцуулга
-- [API.md](API.md) - API reference
-- [CODE_REVIEW.md](CODE_REVIEW.md) - Код шалгалт
+- [API.md](API.md) - API бүрэн тайлбар
 
 **English:**
 - [README.EN.md](README.EN.md) - General introduction
 - [API.EN.md](API.EN.md) - API reference
-- [CODE_REVIEW.EN.md](CODE_REVIEW.EN.md) - Code review
+- [CODE_REVIEW.md](CODE_REVIEW.md) - Code review

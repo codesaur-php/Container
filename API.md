@@ -444,10 +444,9 @@ $service2 = $container->get(HeavyService::class);
 ## See Also
 
 - [README.md](README.md) - Ерөнхий танилцуулга, суурилуулалт, хэрэглээ
-- [CODE_REVIEW.md](CODE_REVIEW.md) - Код шалгалтын тайлан
 - [CHANGELOG.md](CHANGELOG.md) - Өөрчлөлтийн түүх
 
 **English versions:**
 - [README.EN.md](README.EN.md) - General introduction, installation, usage
-- [CODE_REVIEW.EN.md](CODE_REVIEW.EN.md) - Code review report
+- [CODE_REVIEW.md](CODE_REVIEW.md) - Code review report
 - [CHANGELOG.EN.md](CHANGELOG.EN.md) - Changelog
