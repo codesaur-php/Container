@@ -1,125 +1,183 @@
-# Code Review Summary
+# Код Шалгалтын Тайлан
 
-## Overall Assessment
-The codebase is well-structured and follows PSR-11 standards. The implementation is clean and straightforward.
+**Хэл:** Монгол | [English](CODE_REVIEW.EN.md)
 
-## Strengths
+---
 
-1. **PSR-11 Compliance**: Properly implements `ContainerInterface` with correct exception types
-2. **Clean Code**: Well-documented with Mongolian comments, clear method names
-3. **Type Safety**: Uses PHP 8.2+ features (typed properties, mixed type)
-4. **Exception Handling**: Proper exception hierarchy with PSR-11 interfaces
-5. **Callable Support**: Supports closures/callables for factory pattern
+## Ерөнхий Үнэлгээ
 
-## Code Review Findings
+Код нь сайн бүтэцтэй бөгөөд PSR-11 стандартыг дагаж байна. Хэрэгжүүлэлт нь цэвэр, шууд бөгөөд ойлгомжтой.
+
+---
+
+## Давуу Талууд
+
+1. **PSR-11 Нийцтэй Байдал**: `ContainerInterface`-ийг зөв exception төрлүүдтэйгээр хэрэгжүүлсэн
+2. **Цэвэр Код**: Монгол тайлбартай, ойлгомжтой method нэртэй
+3. **Төрлийн Аюулгүй Байдал**: PHP 8.2+ онцлогууд ашигласан (typed properties, mixed type)
+4. **Exception Боловсруулалт**: PSR-11 interface-үүдтэй зөв exception иерархи
+5. **Callable Дэмжлэг**: Factory pattern-д closure/callable дэмждэг
+
+---
+
+## Код Шалгалтын Олдворууд
 
 ### Container.php
 
-#### Positive Aspects:
-- ✅ Proper use of ReflectionClass for instantiation
-- ✅ Good separation of concerns
-- ✅ Clear error messages
-- ✅ Singleton-like behavior (same instance returned on multiple `get()` calls)
+#### Эерэг Талууд:
+- ✅ ReflectionClass-ийг зөв ашиглаж instance үүсгэх
+- ✅ Сайн салангид асуудал (separation of concerns)
+- ✅ Ойлгомжтой алдааны мессежүүд
+- ✅ Singleton-тэй төстэй зан үйл (олон `get()` дуудлагад ижил instance буцаах)
 
-#### Observations & Suggestions:
+#### Ажиглалт ба Санал:
 
 1. **Lazy Loading**: 
-   - Services are now instantiated only when `get()` is called (lazy loading)
-   - This improves performance for heavy services that may not always be used
-   - Instances are cached after first creation (singleton behavior)
-   - **Status**: Implemented and tested
+   - Сервисүүд зөвхөн `get()` дуудагдах үед л үүсгэгдэнэ (lazy loading)
+   - Энэ нь ихэвчлэн ашиглахгүй хүнд сервисүүдийн гүйцэтгэлийг сайжруулна
+   - Instance-үүд эхний үүсгэлтийн дараа кэшлэгдэнэ (singleton behavior)
+   - **Төлөв**: Хэрэгжүүлсэн ба тест хийгдсэн
 
-2. **No Automatic Dependency Resolution**:
-   - The container doesn't automatically resolve constructor dependencies from other registered services
-   - Users must manually provide all constructor arguments
-   - **Status**: Intentional simplicity, acceptable for lightweight container
+2. **Auto-wiring (Автомат Dependency Resolution)**:
+   - Контейнер нь constructor-ын параметрүүдэд class type hint байвал container-ээс автоматаар dependency resolve хийх боломжтой
+   - User аргумент өгсөн бол түүнийг ашиглана (auto-wiring-ээс давуу)
+   - Optional параметрүүдэд default value ашиглана
+   - **Төлөв**: Хэрэгжүүлсэн ба тест хийгдсэн
 
-3. **Callable Handling**:
-   - Callables receive the container as parameter, enabling factory pattern
-   - **Status**: Well implemented
+3. **Callable Боловсруулалт**:
+   - Callable-ууд container-ийг параметрээр авч, factory pattern-ийг боломжтой болгодог
+   - **Төлөв**: Сайн хэрэгжүүлсэн
 
-4. **Error Handling**:
-   - Proper exception types for different error scenarios
-   - **Status**: Good
+4. **Алдаа Боловсруулалт**:
+   - Өөр өөр алдааны сценариудад зөв exception төрлүүд
+   - **Төлөв**: Сайн
 
 ### ContainerException.php & NotFoundException.php
 
-- ✅ Properly extend Exception
-- ✅ Implement correct PSR-11 interfaces
-- ✅ Clean and minimal (as they should be)
+- ✅ Exception-ийг зөв өргөтгөсөн
+- ✅ Зөв PSR-11 interface-үүдийг хэрэгжүүлсэн
+- ✅ Цэвэр, хамгийн бага (байх ёстой байдлаар)
 
-## Potential Improvements (Optional)
+---
 
-1. **Auto-wiring**: Could add optional automatic dependency resolution
-2. **Interface Binding**: Support for binding interfaces to implementations
-3. **Service Aliases**: Built-in alias support (currently requires manual workaround)
+## Хэрэгжүүлсэн Feature-үүд
 
-## Test Coverage
+### Auto-wiring (Автомат Dependency Resolution)
 
-### Unit Tests
+✅ **Хэрэгжүүлсэн**: Container нь constructor-ын параметрүүдэд class type hint байвал container-ээс автоматаар dependency resolve хийх механизмтай болсон.
 
-Unit tests have been created covering:
-- ✅ Basic registration and retrieval
-- ✅ Constructor argument passing
-- ✅ Exception handling
-- ✅ Callable/closure support
-- ✅ PSR-11 compliance
-- ✅ Edge cases (optional parameters, no constructor, etc.)
-- ✅ Exception class tests
-- ✅ Lazy loading behavior (services not instantiated until `get()` is called)
-- ✅ Instance caching (singleton behavior after first `get()`)
+**Онцлогууд:**
+- Constructor-ын class type hint-ээс автоматаар dependency олдож inject хийгдэнэ
+- User аргумент өгсөн бол түүнийг ашиглана (auto-wiring-ээс давуу)
+- Optional параметрүүдэд default value ашиглана
+- Container-т бүртгэгдсэн dependency байх ёстой
+- Хэрэв dependency олдохгүй бол `ContainerException` шиднэ
 
-### Integration Tests
+**Төлөв**: Хэрэгжүүлсэн ба тест хийгдсэн
 
-Integration tests (`tests/IntegrationTest.php`) have been added to verify the container works correctly in realistic application scenarios:
+### Interface Binding
 
-- ✅ **Complete application setup**: Tests a full application bootstrap scenario with multiple interdependent services
-- ✅ **Service replacement**: Verifies removing and re-registering services works correctly
-- ✅ **Singleton behavior across services**: Ensures shared services maintain singleton pattern when used by multiple consumers
-- ✅ **Complex dependency chains**: Tests multi-level dependency resolution
-- ✅ **Mixed registration types**: Verifies class-based and callable-based registrations work together
-- ✅ **Error handling in dependency chain**: Tests proper error propagation when dependencies are missing
-- ✅ **Lazy loading in complex scenarios**: Verifies lazy loading works correctly with complex dependency relationships
+✅ **Хэрэгжүүлсэн**: Interface-үүдийг implementation-уудтай холбох дэмжлэг нэмэгдсэн.
+
+**Онцлогууд:**
+- `bind()` метод ашиглан interface-ийг implementation-тай холбох боломжтой
+- Interface-ийг `get()` дуудахад implementation instance буцаана
+- Auto-wiring-тэй хамт ажиллана
+- Loose coupling-ийг дэмждэг
+
+**Төлөв**: Хэрэгжүүлсэн ба тест хийгдсэн
+
+### Service Aliases
+
+✅ **Хэрэгжүүлсэн**: Дотоод alias дэмжлэг нэмэгдсэн.
+
+**Онцлогууд:**
+- `alias()` метод ашиглан нэг сервисийг олон нэрээр авах боломжтой
+- Бүх alias-үүд ижил instance буцаана (singleton behavior)
+- Interface binding-тэй хамт ажиллана
+- Давхар alias хийхийг хориглоно
+
+**Төлөв**: Хэрэгжүүлсэн ба тест хийгдсэн
+
+---
+
+## Тест Coverage
+
+### Unit Test-үүд
+
+Unit test-үүд дараах зүйлсийг хамарсан:
+
+- ✅ Үндсэн бүртгэл ба авах
+- ✅ Constructor аргумент дамжуулах
+- ✅ Exception боловсруулалт
+- ✅ Callable/closure дэмжлэг
+- ✅ PSR-11 нийцтэй байдал
+- ✅ Edge case-үүд (optional parameters, constructor байхгүй, гэх мэт)
+- ✅ Exception класс тест-үүд
+- ✅ Lazy loading зан үйл (сервисүүд `get()` дуудагдах хүртэл үүсгэгдэхгүй)
+- ✅ Instance кэшлэлт (эхний `get()`-ийн дараа singleton behavior)
+- ✅ Auto-wiring функц (автомат dependency resolution)
+- ✅ Interface binding функц (interface-ийг implementation-тай холбох)
+- ✅ Service aliases функц (нэг сервисийг олон нэрээр авах)
+
+### Integration Test-үүд
+
+Integration test-үүд (`tests/IntegrationTest.php`) нь контейнер бодит application сценариуудад зөв ажиллаж байгааг баталгаажуулахын тулд нэмэгдсэн:
+
+- ✅ **Бүрэн application setup**: Олон хамааралтай сервисүүдтэй бүрэн application bootstrap сценари тест хийх
+- ✅ **Service replacement**: Сервис устгах, дахин бүртгэх зөв ажиллаж байгааг баталгаажуулах
+- ✅ **Singleton behavior сервисүүдийн дунд**: Хуваалцсан сервисүүд олон хэрэглэгч ашиглах үед singleton pattern-ийг хадгалж байгааг баталгаажуулах
+- ✅ **Нарийн dependency chain-үүд**: Олон түвшний dependency resolution тест хийх
+- ✅ **Холимог бүртгэлийн төрлүүд**: Класс болон callable-д суурилсан бүртгэлүүд хамтдаа ажиллаж байгааг баталгаажуулах
+- ✅ **Dependency chain дахь алдаа боловсруулалт**: Dependency-үүд дутуу байх үед зөв алдаа тараахыг тест хийх
+- ✅ **Нарийн сценариуудад lazy loading**: Lazy loading нарийн dependency харилцаатай зөв ажиллаж байгааг баталгаажуулах
+
+---
 
 ## CI/CD
 
 ### GitHub Actions Workflow
 
-A comprehensive CI/CD pipeline has been set up using GitHub Actions (`.github/workflows/ci.yml`):
+GitHub Actions (`.github/workflows/ci.yml`) ашиглан бүрэн CI/CD pipeline тохируулсан:
 
 **Test Job:**
-- Runs on multiple PHP versions (8.2, 8.3, 8.4)
-- Tests on both Ubuntu and Windows platforms
-- Generates code coverage reports
-- Uploads coverage to Codecov
+- Олон PHP хувилбар дээр ажиллана (8.2, 8.3, 8.4)
+- Ubuntu болон Windows платформууд дээр тест хийх
+- Код coverage тайлан үүсгэх
+- Codecov руу coverage илгээх
 
 **Lint Job:**
-- Performs PHP syntax checking on all source and test files
-- Ensures code quality before merging
+- Бүх source болон test файлууд дээр PHP синтакс шалгалт хийх
+- Нэгтгэхээс өмнө код чанарыг баталгаажуулах
 
 **Triggers:**
-- Automatically runs on pushes to `main`, `master`, and `develop` branches
-- Runs on all pull requests to these branches
+- `main`, `master`, `develop` branch-ууд руу push хийхэд автоматаар ажиллана
+- Эдгээр branch-ууд руух бүх pull request-үүд дээр ажиллана
 
-### Benefits
+### Давуу Талууд
 
-- ✅ **Automated testing**: All tests run automatically on every push/PR
-- ✅ **Multi-version compatibility**: Ensures code works across PHP 8.2-8.4
-- ✅ **Cross-platform support**: Verifies compatibility on Linux and Windows
-- ✅ **Code quality**: Syntax checks prevent basic errors from being merged
-- ✅ **Coverage tracking**: Codecov integration tracks test coverage over time
+- ✅ **Автомат тест**: Бүх тест-үүд push/PR бүр дээр автоматаар ажиллана
+- ✅ **Олон хувилбарын нийцтэй байдал**: PHP 8.2-8.4 дээр код ажиллаж байгааг баталгаажуулна
+- ✅ **Cross-platform дэмжлэг**: Linux болон Windows дээр нийцтэй байдлыг баталгаажуулна
+- ✅ **Код чанар**: Синтакс шалгалт нь үндсэн алдаануудыг нэгтгэхээс сэргийлнэ
+- ✅ **Coverage хянах**: Codecov интеграци нь цаг хугацааны явцад тест coverage-ийг хянана
 
-## Conclusion
+---
 
-The code is production-ready and well-implemented. The design choices favor simplicity and performance, which aligns with the "lightweight container" goal stated in the README.
+## Дүгнэлт
 
-With the addition of integration tests and CI/CD pipeline, the project now has:
-- Comprehensive test coverage (unit + integration)
-- Automated quality assurance
-- Multi-version and cross-platform compatibility verification
-- Continuous integration for reliable development workflow
+Код нь production-д бэлэн, сайн хэрэгжүүлсэн. Дизайн сонголтууд нь энгийн байдал, гүйцэтгэлд давуу тал олгодог бөгөөд энэ нь README-д заасан "хөнгөн контейнер" зорилгод нийцдэг.
 
-**See Also:**
-- [README.md](README.md) / [README.EN.md](README.EN.md) - General introduction
-- [API.md](API.md) / [API.EN.md](API.EN.md) - API reference
-- [CHANGELOG.md](CHANGELOG.md) / [CHANGELOG.EN.md](CHANGELOG.EN.md) - Changelog
+Integration test болон CI/CD pipeline-ийг нэмснээр төсөл одоо дараах зүйлтэй болсон:
+- Бүрэн тест coverage (unit + integration)
+- Автомат чанарын баталгаажуулалт
+- Олон хувилбар болон cross-platform нийцтэй байдлын баталгаажуулалт
+- Найдвартай хөгжүүлэлтийн workflow-д тасралтгүй интеграци
+
+---
+
+## Бусад баримтууд
+
+- [README.md](README.md) - Ерөнхий танилцуулга
+- [API.md](API.md) - API тайлбар
+- [CHANGELOG.md](CHANGELOG.md) - Өөрчлөлтийн түүх

@@ -7,7 +7,7 @@
 Хөнгөн, хурдан, PSR-11 стандартад нийцсэн **dependency injection container**.  
 Энэ багц нь codesaur framework-ийн үндсэн бүрэлдэхүүн боловч ямар ч PHP төслөөс бие даан ашиглах боломжтой.
 
-**Хэл:** [English](README.EN.md)
+**Хэл:** Монгол | [English](README.EN.md)
 
 ---
 
@@ -154,9 +154,7 @@ $container->remove(MyService::class);
 - Reflection-иас алдаа гарах  
 - Бусад дотоод алдаанууд
 
-Дэлгэрэнгүй мэдээллийг [API.md](API.md) файлаас үзнэ үү. (PHPDoc-уудаас Cursor AI ашиглан автоматаар үүсгэсэн)
-
-**English:** [API.EN.md](API.EN.md)
+Дэлгэрэнгүй мэдээллийг [API](API.md) файлаас үзнэ үү. (PHPDoc-уудаас Cursor AI ашиглан автоматаар үүсгэсэн)
 
 ---
 
@@ -206,7 +204,48 @@ $config = $container->get('config');
 
 ## Advanced Usage
 
-### Бусад сервисээс хамаарал авах
+### Auto-wiring (Автомат Dependency Resolution)
+
+Container нь **auto-wiring** механизмыг дэмждэг. Энэ нь constructor-ын параметрүүдэд class type hint байвал container-ээс автоматаар dependency-г resolve хийх боломжийг олгодог.
+
+```php
+class Database {
+    public function __construct(string $host) {
+        // ...
+    }
+}
+
+class UserService {
+    public function __construct(Database $db) {
+        // ...
+    }
+}
+
+$container = new Container();
+
+// Зөвхөн dependency-үүдийг бүртгэх
+$container->set(Database::class, ['localhost']);
+$container->set(UserService::class);
+
+// Auto-wiring: UserService-ийн constructor-т Database байгаа тул автоматаар inject хийгдэнэ
+$userService = $container->get(UserService::class);
+// UserService-ийн constructor-т Database автоматаар дамжигдсэн байна
+```
+
+**Auto-wiring-ийн давуу талууд:**
+- ⚡ **Хялбар ашиглалт**: Dependency-үүдийг гараар дамжуулах шаардлагагүй
+- 🎯 **Автомат**: Constructor-ын class type hint-ээс автоматаар олдож inject хийгдэнэ
+- 🔄 **Уян хатан**: Хэрэв user аргумент өгсөн бол түүнийг ашиглана (auto-wiring-ээс давуу)
+
+**Анхаарах зүйлс:**
+- Auto-wiring нь зөвхөн **class type hint**-тэй параметрүүдэд ажиллана
+- Container-т бүртгэгдсэн dependency байх ёстой
+- Хэрэв dependency олдохгүй бол `ContainerException` шиднэ
+- Optional параметрүүдэд default value ашиглана (dependency олдохгүй бол)
+
+### Бусад сервисээс хамаарал авах (Гараар)
+
+Хэрэв auto-wiring ашиглахгүй бол dependency-г гараар дамжуулж болно:
 
 ```php
 class A {}
@@ -215,7 +254,7 @@ class B {
 }
 
 $container->set(A::class);
-$container->set(B::class);
+$container->set(B::class, [$container->get(A::class)]); // Гараар дамжуулах
 
 $b = $container->get(B::class);
 ```
@@ -273,12 +312,80 @@ $container->set(Printer::class, ['Hello world!']);
 
 ---
 
-### Simple aliasing
+### Service Aliases
+
+Container нь **service aliases** механизмыг дэмждэг. Энэ нь нэг сервисийг олон нэрээр авах боломжийг олгодог.
 
 ```php
 $container->set(Logger::class);
-$container->set('log', [ $container->get(Logger::class) ]);
+$container->alias('log', Logger::class);
+$container->alias('app.logger', Logger::class);
+
+// Бүх нэрээр ижил instance буцаана
+$logger1 = $container->get(Logger::class);
+$logger2 = $container->get('log');
+$logger3 = $container->get('app.logger');
+
+// $logger1 === $logger2 === $logger3 (ижил instance)
 ```
+
+**Alias-ийн давуу талууд:**
+- 🎯 **Олон нэр**: Нэг сервисийг олон нэрээр авах боломжтой
+- 🔄 **Singleton**: Бүх alias-үүд ижил instance буцаана
+- ✅ **Interface binding**: Interface binding-тэй хамт ажиллана
+- ⚡ **Хялбар**: `alias()` метод ашиглан хялбар бүртгэх
+
+**Анхаарах зүйлс:**
+- Alias үүсгэхээсээ өмнө сервис бүртгэгдсэн байх ёстой
+- Давхар alias хийхийг хориглоно
+- Alias нэр нь бодит сервисийн нэртэй ижил байх ёсгүй
+
+---
+
+### Interface Binding
+
+Interface-үүдийг implementation-уудтай холбох боломжтой. Энэ нь dependency injection-д interface ашиглах боломжийг олгодог.
+
+```php
+interface LoggerInterface {
+    public function log(string $message): void;
+}
+
+class FileLogger implements LoggerInterface {
+    public function __construct(string $filePath) {}
+    public function log(string $message): void {}
+}
+
+class DatabaseLogger implements LoggerInterface {
+    public function __construct(string $host) {}
+    public function log(string $message): void {}
+}
+
+$container = new Container();
+
+// Interface-ийг implementation-тай холбох
+$container->bind(LoggerInterface::class, FileLogger::class);
+$container->set(FileLogger::class, ['/var/log/app.log']);
+
+// Interface-ээр авахад implementation instance буцаана
+$logger = $container->get(LoggerInterface::class);
+// $logger нь FileLogger instance байна
+
+// Auto-wiring-тэй хамт ашиглах
+class UserService {
+    public function __construct(LoggerInterface $logger) {}
+}
+
+$container->set(UserService::class);
+$service = $container->get(UserService::class);
+// UserService-ийн constructor-т FileLogger автоматаар inject хийгдэнэ
+```
+
+**Interface Binding-ийн давуу талууд:**
+- 🎯 **Loose Coupling**: Interface ашиглаж implementation-аас хамааралгүй болно
+- 🔄 **Уян хатан**: Implementation-ийг хялбар солих боломжтой
+- ✅ **Auto-wiring**: Auto-wiring-тэй хамт ажиллана
+
 ---
 
 ## Example хавтас
@@ -319,13 +426,13 @@ composer install
 
 ```cmd
 # Бүх тестүүдийг ажиллуулах
-vendor\bin\phpunit
+vendor\bin\phpunit.bat
 
 # Тодорхой тест файл ажиллуулах
-vendor\bin\phpunit tests\ContainerTest.php
+vendor\bin\phpunit.bat tests\ContainerTest.php
 
 # Integration test ажиллуулах
-vendor\bin\phpunit tests\IntegrationTest.php
+vendor\bin\phpunit.bat tests\IntegrationTest.php
 ```
 
 #### Linux / macOS (Terminal)
@@ -346,7 +453,7 @@ vendor/bin/phpunit tests/IntegrationTest.php
 #### Windows (Command Prompt)
 
 ```cmd
-vendor\bin\phpunit --coverage-text
+vendor\bin\phpunit.bat --coverage-text
 ```
 
 #### Linux / macOS (Terminal)
@@ -360,7 +467,7 @@ vendor/bin/phpunit --coverage-text
 #### Windows (Command Prompt)
 
 ```cmd
-vendor\bin\phpunit --filter testSetAndGet tests\ContainerTest.php
+vendor\bin\phpunit.bat --filter testSetAndGet tests\ContainerTest.php
 ```
 
 #### Linux / macOS (Terminal)
@@ -417,9 +524,9 @@ CI дээр ажиллаж буй тестүүдийг локал дээр аж�
 #### Windows (Command Prompt)
 
 ```cmd
-vendor\bin\phpunit
-vendor\bin\phpunit --coverage-text
-vendor\bin\phpunit tests\IntegrationTest.php
+vendor\bin\phpunit.bat
+vendor\bin\phpunit.bat --coverage-text
+vendor\bin\phpunit.bat tests\IntegrationTest.php
 ```
 
 #### Linux / macOS (Terminal)
@@ -439,15 +546,13 @@ vendor/bin/phpunit tests/IntegrationTest.php
 
 ## Код шалгалт
 
-Төслийн кодын нарийвчилсан шалгалтын тайланг [CODE_REVIEW.md](CODE_REVIEW.md) файлаас харна уу. (Cursor AI ашиглан үүсгэсэн)
+Төслийн кодын нарийвчилсан шалгалтын тайланг [CODE_REVIEW](CODE_REVIEW.md) файлаас харна уу. (Cursor AI ашиглан үүсгэсэн)
 
 ---
 
 ## Changelog
 
-Багцын өөрчлөлтийн түүхийг [CHANGELOG.md](CHANGELOG.md) файлаас харна уу.
-
-**English:** [CHANGELOG.EN.md](CHANGELOG.EN.md)
+Багцын өөрчлөлтийн түүхийг [CHANGELOG](CHANGELOG.md) файлаас харна уу.
 
 ---
 

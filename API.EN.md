@@ -2,7 +2,7 @@
 
 This document contains the complete API description for the `codesaur/container` package.
 
-**Language:** [Монгол (Mongolian)](API.md)
+**Language:** [Монгол](API.md) | English
 
 ---
 
@@ -14,6 +14,8 @@ This document contains the complete API description for the `codesaur/container`
    - [has()](#has)
    - [set()](#set)
    - [remove()](#remove)
+   - [alias()](#alias)
+   - [bind()](#bind)
 3. [Exceptions](#exceptions)
    - [NotFoundException](#notfoundexception)
    - [ContainerException](#containerexception)
@@ -243,6 +245,149 @@ $container->set(MyService::class);
 
 ---
 
+### alias()
+
+Assign an alias name to a service.
+
+#### Signature
+
+```php
+public function alias(string $alias, string $name): void
+```
+
+#### Parameters
+
+- **`string $alias`** - Alias name
+- **`string $name`** - Real service name
+
+#### Returns
+
+- **`void`**
+
+#### Throws
+
+- **`NotFoundException`** - If service is not found
+- **`ContainerException`** - If duplicate alias or alias name equals service name
+
+#### Description
+
+Aliases allow accessing one service by multiple names. All aliases return the same instance (singleton behavior).
+
+**Notes:**
+- Service must be registered before creating an alias
+- Duplicate aliases are not allowed
+- Alias name cannot be the same as the service name
+- Works together with interface binding
+
+#### Example
+
+```php
+$container = new Container();
+$container->set(Logger::class);
+
+// Create aliases
+$container->alias('log', Logger::class);
+$container->alias('app.logger', Logger::class);
+
+// All names return the same instance
+$logger1 = $container->get(Logger::class);
+$logger2 = $container->get('log');
+$logger3 = $container->get('app.logger');
+
+// $logger1 === $logger2 === $logger3
+```
+
+#### Example: Interface Binding with Alias
+
+```php
+interface LoggerInterface {
+    public function log(string $message): void;
+}
+
+class FileLogger implements LoggerInterface {
+    public function log(string $message): void {}
+}
+
+$container = new Container();
+$container->bind(LoggerInterface::class, FileLogger::class);
+$container->set(FileLogger::class, ['/var/log/app.log']);
+
+// Create alias for interface
+$container->alias('logger', LoggerInterface::class);
+
+$logger1 = $container->get(LoggerInterface::class);
+$logger2 = $container->get('logger');
+
+// $logger1 === $logger2
+```
+
+---
+
+### bind()
+
+Bind an interface to an implementation.
+
+#### Signature
+
+```php
+public function bind(string $interface, string $implementation): void
+```
+
+#### Parameters
+
+- **`string $interface`** - Interface name
+- **`string $implementation`** - Implementation class name
+
+#### Returns
+
+- **`void`**
+
+#### Throws
+
+- **`NotFoundException`** - If class does not exist
+- **`ContainerException`** - If class does not implement interface or duplicate binding
+
+#### Description
+
+Binds an interface to an implementation. When getting the interface, the implementation instance is returned.
+
+**Notes:**
+- The implementation class must implement the interface
+- Duplicate bindings are not allowed
+- Works together with auto-wiring
+
+#### Example
+
+```php
+interface LoggerInterface {
+    public function log(string $message): void;
+}
+
+class FileLogger implements LoggerInterface {
+    private string $filePath;
+    
+    public function __construct(string $filePath) {
+        $this->filePath = $filePath;
+    }
+    
+    public function log(string $message): void {
+        file_put_contents($this->filePath, $message . PHP_EOL, FILE_APPEND);
+    }
+}
+
+$container = new Container();
+
+// Bind interface to implementation
+$container->bind(LoggerInterface::class, FileLogger::class);
+$container->set(FileLogger::class, ['/var/log/app.log']);
+
+// Getting interface returns implementation instance
+$logger = $container->get(LoggerInterface::class);
+$logger->log('Test message'); // Uses FileLogger instance
+```
+
+---
+
 ## Exceptions
 
 ### NotFoundException
@@ -418,6 +563,120 @@ $service2 = $container->get(HeavyService::class);
 // $service1 === $service2 (same instance)
 ```
 
+### Example 6: Interface Binding
+
+```php
+interface LoggerInterface {
+    public function log(string $message): void;
+}
+
+class FileLogger implements LoggerInterface {
+    private string $filePath;
+    
+    public function __construct(string $filePath) {
+        $this->filePath = $filePath;
+    }
+    
+    public function log(string $message): void {
+        file_put_contents($this->filePath, $message . PHP_EOL, FILE_APPEND);
+    }
+}
+
+$container = new Container();
+
+// Bind interface to implementation
+$container->bind(LoggerInterface::class, FileLogger::class);
+$container->set(FileLogger::class, ['/var/log/app.log']);
+
+// Getting interface returns implementation instance
+$logger = $container->get(LoggerInterface::class);
+$logger->log('Test message'); // Uses FileLogger instance
+```
+
+### Example 7: Interface Binding with Auto-wiring
+
+```php
+class UserService {
+    private LoggerInterface $logger;
+    
+    public function __construct(LoggerInterface $logger) {
+        $this->logger = $logger;
+    }
+    
+    public function getLogger(): LoggerInterface {
+        return $this->logger;
+    }
+}
+
+$container = new Container();
+
+// Interface binding
+$container->bind(LoggerInterface::class, FileLogger::class);
+$container->set(FileLogger::class, ['/var/log/app.log']);
+
+// Auto-wiring: FileLogger is automatically injected into UserService constructor
+$container->set(UserService::class);
+
+$service = $container->get(UserService::class);
+$service->getLogger()->log('User action'); // Uses FileLogger instance
+```
+
+### Example 8: Service Aliases
+
+```php
+$container = new Container();
+$container->set(Logger::class);
+
+// Create multiple aliases
+$container->alias('log', Logger::class);
+$container->alias('app.logger', Logger::class);
+$container->alias('logger_service', Logger::class);
+
+// All names return the same instance
+$logger1 = $container->get(Logger::class);
+$logger2 = $container->get('log');
+$logger3 = $container->get('app.logger');
+$logger4 = $container->get('logger_service');
+
+// $logger1 === $logger2 === $logger3 === $logger4
+```
+
+### Example 9: Service Alias with Interface Binding
+
+```php
+interface LoggerInterface {
+    public function log(string $message): void;
+}
+
+class FileLogger implements LoggerInterface {
+    private string $filePath;
+    
+    public function __construct(string $filePath) {
+        $this->filePath = $filePath;
+    }
+    
+    public function log(string $message): void {
+        file_put_contents($this->filePath, $message . PHP_EOL, FILE_APPEND);
+    }
+}
+
+$container = new Container();
+
+// Interface binding
+$container->bind(LoggerInterface::class, FileLogger::class);
+$container->set(FileLogger::class, ['/var/log/app.log']);
+
+// Create alias for interface
+$container->alias('logger', LoggerInterface::class);
+
+// All names return the same instance
+$logger1 = $container->get(LoggerInterface::class);
+$logger2 = $container->get('logger');
+
+// $logger1 === $logger2
+$logger2->log('Test message'); // Uses FileLogger instance
+```
+
 ---
 
 ## PSR-11 Compliance
@@ -431,6 +690,61 @@ This container fully implements the PSR-11 standard:
 
 ---
 
+## Auto-wiring
+
+### Description
+
+Auto-wiring is a mechanism that automatically resolves dependencies from the container when constructor parameters have class type hints.
+
+### How It Works
+
+1. When creating an instance, the container checks constructor parameters
+2. For parameters with class type hints, it tries to resolve from the container
+3. If a dependency is registered in the container, it is automatically injected
+4. User-provided arguments take precedence over auto-wiring
+5. Optional parameters use default values if dependency is not found
+
+### Example
+
+```php
+class Database {
+    public function __construct(string $host) {
+        // ...
+    }
+}
+
+class UserService {
+    public function __construct(Database $db) {
+        // ...
+    }
+}
+
+$container = new Container();
+
+// Register only dependencies
+$container->set(Database::class, ['localhost']);
+$container->set(UserService::class);
+
+// Auto-wiring: Database is automatically injected into UserService constructor
+$userService = $container->get(UserService::class);
+// Database is automatically passed to UserService constructor
+```
+
+### Benefits
+
+- ⚡ **Easy to use**: No need to manually pass dependencies
+- 🎯 **Automatic**: Automatically resolves and injects from class type hints
+- 🔄 **Flexible**: User-provided arguments take precedence over auto-wiring
+
+### Notes
+
+- Auto-wiring only works for parameters with **class type hints**
+- Dependencies must be registered in the container
+- Throws `ContainerException` if dependency is not found
+- Optional parameters use default values if dependency is not found
+
+---
+
 ## Best Practices
 
 1. **Use Lazy Loading**: Create heavy services only when needed
@@ -438,15 +752,14 @@ This container fully implements the PSR-11 standard:
 3. **Exception Handling**: Use `try-catch` blocks to properly handle errors
 4. **Service Naming**: Use clear, understandable names
 5. **Configuration Management**: Register configuration as callable
+6. **Auto-wiring**: Use auto-wiring for automatic dependency resolution
+7. **Interface Binding**: Use interface binding for loose coupling
+8. **Service Aliases**: Use aliases for accessing services by multiple names
 
 ---
 
 ## See Also
 
-- [README.EN.md](README.EN.md) - General introduction, installation, usage
-- [CODE_REVIEW.md](CODE_REVIEW.md) - Code review report
-- [CHANGELOG.EN.md](CHANGELOG.EN.md) - Changelog
-
-**Монгол versions:**
-- [README.md](README.md) - Ерөнхий танилцуулга, суурилуулалт, хэрэглээ
-- [CHANGELOG.md](CHANGELOG.md) - Өөрчлөлтийн түүх
+- [README](README.EN.md) - General introduction, installation, usage
+- [CODE_REVIEW](CODE_REVIEW.EN.md) - Code review report
+- [CHANGELOG](CHANGELOG.EN.md) - Changelog

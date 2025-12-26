@@ -7,7 +7,7 @@
 Lightweight, fast, PSR-11 compliant **dependency injection container**.  
 This package is a component of the codesaur framework but can be used independently in any PHP project.
 
-**Language:** [Монгол (Mongolian)](README.md)
+**Language:** [Монгол](README.md) | English
 
 ---
 
@@ -152,9 +152,7 @@ $container->remove(MyService::class);
 - Errors from Reflection  
 - Other internal errors
 
-For detailed information, see [API.EN.md](API.EN.md) file. (Auto-generated from PHPDoc using Cursor AI)
-
-**Монгол:** [API.md](API.md)
+For detailed information, see [API](API.EN.md) file. (Auto-generated from PHPDoc using Cursor AI)
 
 ---
 
@@ -204,7 +202,48 @@ $config = $container->get('config');
 
 ## Advanced Usage
 
-### Getting Dependencies from Other Services
+### Auto-wiring (Automatic Dependency Resolution)
+
+The container supports **auto-wiring** mechanism. This allows automatic dependency resolution from the container when constructor parameters have class type hints.
+
+```php
+class Database {
+    public function __construct(string $host) {
+        // ...
+    }
+}
+
+class UserService {
+    public function __construct(Database $db) {
+        // ...
+    }
+}
+
+$container = new Container();
+
+// Register only dependencies
+$container->set(Database::class, ['localhost']);
+$container->set(UserService::class);
+
+// Auto-wiring: Database is automatically injected into UserService constructor
+$userService = $container->get(UserService::class);
+// Database is automatically passed to UserService constructor
+```
+
+**Benefits of Auto-wiring:**
+- ⚡ **Easy to use**: No need to manually pass dependencies
+- 🎯 **Automatic**: Automatically resolves and injects from class type hints
+- 🔄 **Flexible**: User-provided arguments take precedence over auto-wiring
+
+**Notes:**
+- Auto-wiring only works for parameters with **class type hints**
+- Dependencies must be registered in the container
+- Throws `ContainerException` if dependency is not found
+- Optional parameters use default values if dependency is not found
+
+### Getting Dependencies from Other Services (Manual)
+
+If you don't want to use auto-wiring, you can manually pass dependencies:
 
 ```php
 class A {}
@@ -213,7 +252,7 @@ class B {
 }
 
 $container->set(A::class);
-$container->set(B::class);
+$container->set(B::class, [$container->get(A::class)]); // Manual passing
 
 $b = $container->get(B::class);
 ```
@@ -271,12 +310,79 @@ $container->set(Printer::class, ['Hello world!']);
 
 ---
 
-### Simple Aliasing
+### Service Aliases
+
+The container supports **service aliases** mechanism. This allows accessing one service by multiple names.
 
 ```php
 $container->set(Logger::class);
-$container->set('log', [ $container->get(Logger::class) ]);
+$container->alias('log', Logger::class);
+$container->alias('app.logger', Logger::class);
+
+// All names return the same instance
+$logger1 = $container->get(Logger::class);
+$logger2 = $container->get('log');
+$logger3 = $container->get('app.logger');
+
+// $logger1 === $logger2 === $logger3 (same instance)
 ```
+
+**Benefits of Aliases:**
+- 🎯 **Multiple names**: Access one service by multiple names
+- 🔄 **Singleton**: All aliases return the same instance
+- ✅ **Interface binding**: Works together with interface binding
+- ⚡ **Easy**: Easy to register using `alias()` method
+
+**Notes:**
+- Service must be registered before creating an alias
+- Duplicate aliases are not allowed
+- Alias name cannot be the same as the service name
+
+---
+
+### Interface Binding
+
+Interfaces can be bound to implementations. This enables using interfaces in dependency injection.
+
+```php
+interface LoggerInterface {
+    public function log(string $message): void;
+}
+
+class FileLogger implements LoggerInterface {
+    public function __construct(string $filePath) {}
+    public function log(string $message): void {}
+}
+
+class DatabaseLogger implements LoggerInterface {
+    public function __construct(string $host) {}
+    public function log(string $message): void {}
+}
+
+$container = new Container();
+
+// Bind interface to implementation
+$container->bind(LoggerInterface::class, FileLogger::class);
+$container->set(FileLogger::class, ['/var/log/app.log']);
+
+// Getting interface returns implementation instance
+$logger = $container->get(LoggerInterface::class);
+// $logger is a FileLogger instance
+
+// Use with auto-wiring
+class UserService {
+    public function __construct(LoggerInterface $logger) {}
+}
+
+$container->set(UserService::class);
+$service = $container->get(UserService::class);
+// FileLogger is automatically injected into UserService constructor
+```
+
+**Benefits of Interface Binding:**
+- 🎯 **Loose Coupling**: Use interfaces to avoid dependency on implementations
+- 🔄 **Flexible**: Easy to swap implementations
+- ✅ **Auto-wiring**: Works together with auto-wiring
 
 ---
 
@@ -318,13 +424,13 @@ This will install PHPUnit and other dev dependencies.
 
 ```cmd
 # Run all tests
-vendor\bin\phpunit
+vendor\bin\phpunit.bat
 
 # Run specific test file
-vendor\bin\phpunit tests\ContainerTest.php
+vendor\bin\phpunit.bat tests\ContainerTest.php
 
 # Run integration test
-vendor\bin\phpunit tests\IntegrationTest.php
+vendor\bin\phpunit.bat tests\IntegrationTest.php
 ```
 
 #### Linux / macOS (Terminal)
@@ -345,7 +451,7 @@ vendor/bin/phpunit tests/IntegrationTest.php
 #### Windows (Command Prompt)
 
 ```cmd
-vendor\bin\phpunit --coverage-text
+vendor\bin\phpunit.bat --coverage-text
 ```
 
 #### Linux / macOS (Terminal)
@@ -359,7 +465,7 @@ vendor/bin/phpunit --coverage-text
 #### Windows (Command Prompt)
 
 ```cmd
-vendor\bin\phpunit --filter testSetAndGet tests\ContainerTest.php
+vendor\bin\phpunit.bat --filter testSetAndGet tests\ContainerTest.php
 ```
 
 #### Linux / macOS (Terminal)
@@ -416,9 +522,9 @@ To run the same tests that run on CI locally:
 #### Windows (Command Prompt)
 
 ```cmd
-vendor\bin\phpunit
-vendor\bin\phpunit --coverage-text
-vendor\bin\phpunit tests\IntegrationTest.php
+vendor\bin\phpunit.bat
+vendor\bin\phpunit.bat --coverage-text
+vendor\bin\phpunit.bat tests\IntegrationTest.php
 ```
 
 #### Linux / macOS (Terminal)
@@ -438,15 +544,13 @@ vendor/bin/phpunit tests/IntegrationTest.php
 
 ## Code Review
 
-For detailed code review report, see [CODE_REVIEW.md](CODE_REVIEW.md) file. (Generated using Cursor AI)
+For detailed code review report, see [CODE_REVIEW](CODE_REVIEW.EN.md) file. (Generated using Cursor AI)
 
 ---
 
 ## Changelog
 
-For version history and changes, see [CHANGELOG.EN.md](CHANGELOG.EN.md) file.
-
-**Монгол:** [CHANGELOG.md](CHANGELOG.md)
+For version history and changes, see [CHANGELOG](CHANGELOG.EN.md) file.
 
 ---
 

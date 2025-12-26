@@ -2,10 +2,38 @@
 
 This file documents all notable changes to the `codesaur/container` package.
 
-**Language:** [Монгол (Mongolian)](CHANGELOG.md)
+**Language:** [Монгол](CHANGELOG.md) | English
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+---
+
+## [3.1.0] - 2025-12-26
+
+### Added
+- ✅ Auto-wiring feature added
+  - Automatically resolves dependencies from container when constructor parameters have class type hints
+  - User-provided arguments take priority over auto-wiring
+  - Uses default values for optional parameters
+- ✅ Interface binding feature added
+  - Ability to bind interfaces to implementations (`bind()` method)
+  - Getting interface returns implementation instance
+  - Works together with auto-wiring
+- ✅ Service aliases support added
+  - Ability to access one service by multiple names (`alias()` method)
+  - All aliases return the same instance (singleton behavior)
+  - Works together with interface binding
+- ✅ Auto-wiring tests added
+- ✅ Interface binding tests added
+- ✅ Service aliases tests added
+- ✅ Documentation for auto-wiring, interface binding, and service aliases added to README.md and API.md
+- ✅ Documentation for auto-wiring, interface binding, and service aliases added to README.EN.md and API.EN.md
+- ✅ Implemented features information added to CODE_REVIEW.md and CODE_REVIEW.EN.md
+
+### Changed
+- ✅ All *.md files refactored (unified style)
+- ✅ Markdown syntax errors fixed
 
 ---
 
@@ -44,17 +72,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-## [Unreleased]
-
-### Planned
-- Auto-wiring feature (optional)
-- Interface binding support
-- Service aliases support
-
----
-
 ## Version History
 
+- **3.1.0** - Auto-wiring, Interface binding, Service aliases features added
 - **3.0.1** - Documentation improvements (English language)
 - **3.0.0** - Stable release
 
@@ -62,10 +82,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Links
 
-- [README.EN.md](README.EN.md) - General introduction
-- [API.EN.md](API.EN.md) - API reference
-- [CODE_REVIEW.md](CODE_REVIEW.md) - Code review
+- [README](README.EN.md) - General introduction
+- [API](API.EN.md) - API reference
+- [CODE_REVIEW](CODE_REVIEW.md) - Code review
 
-**Монгол:**
-- [README.md](README.md) - Ерөнхий танилцуулга
-- [API.md](API.md) - API бүрэн тайлбар
+[3.1.0]: https://github.com/codesaur-php/Container/compare/v3.0.1...v3.1.0
+[3.0.1]: https://github.com/codesaur-php/Container/compare/v3.0.0...v3.0.1
+[3.0.0]: https://github.com/codesaur-php/Container/compare/v1.0...v3.0.0

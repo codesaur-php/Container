@@ -332,6 +332,360 @@ class ContainerTest extends TestCase
         $this->assertTrue($callableCalled);
         $this->assertInstanceOf(SimpleClass::class, $instance);
     }
+
+    /**
+     * Test auto-wiring - automatic dependency resolution
+     */
+    public function testAutoWiringResolvesDependencies(): void
+    {
+        // Register dependency
+        $this->container->set(SimpleClass::class);
+
+        // Register class that depends on SimpleClass
+        $this->container->set(ClassWithDependency::class);
+
+        // Auto-wiring should automatically inject SimpleClass
+        $service = $this->container->get(ClassWithDependency::class);
+        $this->assertInstanceOf(ClassWithDependency::class, $service);
+        $this->assertInstanceOf(SimpleClass::class, $service->getDependency());
+    }
+
+    /**
+     * Test auto-wiring with multiple dependencies
+     */
+    public function testAutoWiringWithMultipleDependencies(): void
+    {
+        $this->container->set(SimpleClass::class);
+        $this->container->set(ClassWithDependency::class);
+
+        // Class with multiple dependencies
+        $this->container->set(ClassWithMultipleDependencies::class);
+
+        $service = $this->container->get(ClassWithMultipleDependencies::class);
+        $this->assertInstanceOf(ClassWithMultipleDependencies::class, $service);
+        $this->assertInstanceOf(SimpleClass::class, $service->getDep1());
+        $this->assertInstanceOf(ClassWithDependency::class, $service->getDep2());
+    }
+
+    /**
+     * Test auto-wiring with user-provided arguments (user args take priority)
+     */
+    public function testAutoWiringWithUserProvidedArguments(): void
+    {
+        $this->container->set(SimpleClass::class);
+        
+        // User provides argument, auto-wiring should not override it
+        $customDep = new SimpleClass();
+        $this->container->set(ClassWithDependency::class, [$customDep]);
+
+        $service = $this->container->get(ClassWithDependency::class);
+        $this->assertInstanceOf(ClassWithDependency::class, $service);
+        $this->assertSame($customDep, $service->getDependency());
+    }
+
+    /**
+     * Test auto-wiring with optional parameters (auto-wired when available)
+     */
+    public function testAutoWiringWithOptionalParameters(): void
+    {
+        $this->container->set(SimpleClass::class);
+        $this->container->set(ClassWithOptionalDependency::class);
+
+        $service = $this->container->get(ClassWithOptionalDependency::class);
+        $this->assertInstanceOf(ClassWithOptionalDependency::class, $service);
+        // Auto-wiring should inject SimpleClass even though parameter is optional
+        $this->assertInstanceOf(SimpleClass::class, $service->getDependency());
+    }
+
+    /**
+     * Test auto-wiring with optional parameters (uses default when dependency not registered)
+     */
+    public function testAutoWiringWithOptionalParametersUsesDefault(): void
+    {
+        // Don't register SimpleClass
+        $this->container->set(ClassWithOptionalDependency::class);
+
+        $service = $this->container->get(ClassWithOptionalDependency::class);
+        $this->assertInstanceOf(ClassWithOptionalDependency::class, $service);
+        // Should use default value (null) when dependency not registered
+        $this->assertNull($service->getDependency());
+    }
+
+    /**
+     * Test auto-wiring throws exception when dependency not found
+     */
+    public function testAutoWiringThrowsExceptionWhenDependencyNotFound(): void
+    {
+        // Register class with dependency, but don't register the dependency
+        $this->container->set(ClassWithDependency::class);
+
+        $this->expectException(ContainerException::class);
+        $this->expectExceptionMessage('Cannot resolve parameter');
+
+        $this->container->get(ClassWithDependency::class);
+    }
+
+    /**
+     * Test auto-wiring with mixed dependencies (some auto-wired, some provided)
+     */
+    public function testAutoWiringWithMixedDependencies(): void
+    {
+        $this->container->set(SimpleClass::class);
+        
+        // First arg provided, second should be auto-wired
+        $this->container->set(ClassWithMixedDependencies::class, ['custom-value']);
+
+        $service = $this->container->get(ClassWithMixedDependencies::class);
+        $this->assertInstanceOf(ClassWithMixedDependencies::class, $service);
+        $this->assertEquals('custom-value', $service->getValue());
+        $this->assertInstanceOf(SimpleClass::class, $service->getDependency());
+    }
+
+    /**
+     * Test interface binding - bind interface to implementation
+     */
+    public function testInterfaceBinding(): void
+    {
+        $this->container->bind(LoggerInterface::class, FileLogger::class);
+        $this->container->set(FileLogger::class, ['/var/log/app.log']);
+
+        // Interface-ээр авахад implementation instance буцаана
+        $logger = $this->container->get(LoggerInterface::class);
+        $this->assertInstanceOf(FileLogger::class, $logger);
+        $this->assertInstanceOf(LoggerInterface::class, $logger);
+    }
+
+    /**
+     * Test interface binding with auto-wiring
+     */
+    public function testInterfaceBindingWithAutoWiring(): void
+    {
+        $this->container->bind(LoggerInterface::class, FileLogger::class);
+        $this->container->set(FileLogger::class, ['/var/log/app.log']);
+
+        // Service that depends on LoggerInterface
+        $this->container->set(ServiceWithLoggerInterface::class);
+
+        $service = $this->container->get(ServiceWithLoggerInterface::class);
+        $this->assertInstanceOf(ServiceWithLoggerInterface::class, $service);
+        $this->assertInstanceOf(FileLogger::class, $service->getLogger());
+        $this->assertInstanceOf(LoggerInterface::class, $service->getLogger());
+    }
+
+    /**
+     * Test interface binding throws exception when interface does not exist
+     */
+    public function testInterfaceBindingThrowsExceptionWhenInterfaceNotFound(): void
+    {
+        $this->expectException(NotFoundException::class);
+        $this->expectExceptionMessage('NonExistentInterface interface does not exist');
+
+        $this->container->bind('NonExistentInterface', SimpleClass::class);
+    }
+
+    /**
+     * Test interface binding throws exception when implementation does not exist
+     */
+    public function testInterfaceBindingThrowsExceptionWhenImplementationNotFound(): void
+    {
+        $this->expectException(NotFoundException::class);
+        $this->expectExceptionMessage('NonExistentClass class does not exist');
+
+        $this->container->bind(LoggerInterface::class, 'NonExistentClass');
+    }
+
+    /**
+     * Test interface binding throws exception when class does not implement interface
+     */
+    public function testInterfaceBindingThrowsExceptionWhenClassDoesNotImplementInterface(): void
+    {
+        $this->expectException(ContainerException::class);
+        $this->expectExceptionMessage('does not implement interface');
+
+        $this->container->bind(LoggerInterface::class, SimpleClass::class);
+    }
+
+    /**
+     * Test interface binding throws exception for duplicate binding
+     */
+    public function testInterfaceBindingThrowsExceptionForDuplicateBinding(): void
+    {
+        $this->container->bind(LoggerInterface::class, FileLogger::class);
+
+        $this->expectException(ContainerException::class);
+        $this->expectExceptionMessage('already contains binding for interface');
+
+        $this->container->bind(LoggerInterface::class, FileLogger::class);
+    }
+
+    /**
+     * Test has() method with interface binding
+     */
+    public function testHasWithInterfaceBinding(): void
+    {
+        $this->container->bind(LoggerInterface::class, FileLogger::class);
+        $this->container->set(FileLogger::class);
+
+        $this->assertTrue($this->container->has(LoggerInterface::class));
+        $this->assertTrue($this->container->has(FileLogger::class));
+    }
+
+    /**
+     * Test interface binding with multiple implementations
+     */
+    public function testInterfaceBindingWithMultipleImplementations(): void
+    {
+        $this->container->bind(LoggerInterface::class, FileLogger::class);
+        $this->container->set(FileLogger::class, ['/var/log/app.log']);
+
+        // Change binding to different implementation
+        $this->container->remove(LoggerInterface::class);
+        $this->container->bind(LoggerInterface::class, DatabaseLogger::class);
+        $this->container->set(DatabaseLogger::class, ['localhost', 'logs']);
+
+        $logger = $this->container->get(LoggerInterface::class);
+        $this->assertInstanceOf(DatabaseLogger::class, $logger);
+        $this->assertInstanceOf(LoggerInterface::class, $logger);
+    }
+
+    /**
+     * Test service alias - create alias for service
+     */
+    public function testServiceAlias(): void
+    {
+        $this->container->set(SimpleClass::class);
+        $this->container->alias('simple', SimpleClass::class);
+
+        // Alias-ээр авахад ижил instance буцаана
+        $service1 = $this->container->get(SimpleClass::class);
+        $service2 = $this->container->get('simple');
+
+        $this->assertSame($service1, $service2);
+        $this->assertInstanceOf(SimpleClass::class, $service2);
+    }
+
+    /**
+     * Test service alias with has() method
+     */
+    public function testServiceAliasWithHas(): void
+    {
+        $this->container->set(SimpleClass::class);
+        $this->container->alias('simple', SimpleClass::class);
+
+        $this->assertTrue($this->container->has('simple'));
+        $this->assertTrue($this->container->has(SimpleClass::class));
+    }
+
+    /**
+     * Test service alias throws exception when service not found
+     */
+    public function testServiceAliasThrowsExceptionWhenServiceNotFound(): void
+    {
+        $this->expectException(NotFoundException::class);
+        $this->expectExceptionMessage('Cannot create alias: service');
+
+        $this->container->alias('simple', 'NonExistentService');
+    }
+
+    /**
+     * Test service alias throws exception for duplicate alias
+     */
+    public function testServiceAliasThrowsExceptionForDuplicateAlias(): void
+    {
+        $this->container->set(SimpleClass::class);
+        $this->container->alias('simple', SimpleClass::class);
+
+        $this->expectException(ContainerException::class);
+        $this->expectExceptionMessage('already contains alias named');
+
+        $this->container->alias('simple', SimpleClass::class);
+    }
+
+    /**
+     * Test service alias throws exception when alias name equals service name
+     */
+    public function testServiceAliasThrowsExceptionWhenAliasEqualsServiceName(): void
+    {
+        $this->container->set(SimpleClass::class);
+
+        $this->expectException(ContainerException::class);
+        $this->expectExceptionMessage('cannot be the same as service name');
+
+        $this->container->alias(SimpleClass::class, SimpleClass::class);
+    }
+
+    /**
+     * Test service alias with multiple aliases
+     */
+    public function testServiceAliasWithMultipleAliases(): void
+    {
+        $this->container->set(SimpleClass::class);
+        $this->container->alias('simple', SimpleClass::class);
+        $this->container->alias('simple_service', SimpleClass::class);
+        $this->container->alias('app.simple', SimpleClass::class);
+
+        $service1 = $this->container->get('simple');
+        $service2 = $this->container->get('simple_service');
+        $service3 = $this->container->get('app.simple');
+        $service4 = $this->container->get(SimpleClass::class);
+
+        // Бүх alias-үүд ижил instance буцаана
+        $this->assertSame($service1, $service2);
+        $this->assertSame($service2, $service3);
+        $this->assertSame($service3, $service4);
+    }
+
+    /**
+     * Test service alias with interface binding
+     */
+    public function testServiceAliasWithInterfaceBinding(): void
+    {
+        $this->container->bind(LoggerInterface::class, FileLogger::class);
+        $this->container->set(FileLogger::class, ['/var/log/app.log']);
+        $this->container->alias('logger', LoggerInterface::class);
+
+        $logger1 = $this->container->get(LoggerInterface::class);
+        $logger2 = $this->container->get('logger');
+
+        $this->assertSame($logger1, $logger2);
+        $this->assertInstanceOf(FileLogger::class, $logger2);
+    }
+
+    /**
+     * Test service alias with auto-wiring
+     */
+    public function testServiceAliasWithAutoWiring(): void
+    {
+        $this->container->set(SimpleClass::class);
+        $this->container->alias('dep', SimpleClass::class);
+
+        // Service that depends on SimpleClass
+        $this->container->set(ClassWithDependency::class);
+
+        $service = $this->container->get(ClassWithDependency::class);
+        $this->assertInstanceOf(ClassWithDependency::class, $service);
+        // Auto-wiring should use SimpleClass, not alias
+        $this->assertInstanceOf(SimpleClass::class, $service->getDependency());
+    }
+
+    /**
+     * Test service alias removal
+     */
+    public function testServiceAliasRemoval(): void
+    {
+        $this->container->set(SimpleClass::class);
+        $this->container->alias('simple', SimpleClass::class);
+
+        $this->assertTrue($this->container->has('simple'));
+
+        // Alias устгах
+        $this->container->remove('simple');
+
+        // Alias устгагдсан
+        $this->assertFalse($this->container->has('simple'));
+        // Бодит сервис хэвээр байна
+        $this->assertTrue($this->container->has(SimpleClass::class));
+    }
 }
 
 /**
@@ -426,5 +780,131 @@ class LazyLoadTestClass
     public function __construct()
     {
         self::$instantiationCount++;
+    }
+}
+
+class ClassWithMultipleDependencies
+{
+    private SimpleClass $dep1;
+    private ClassWithDependency $dep2;
+
+    public function __construct(SimpleClass $dep1, ClassWithDependency $dep2)
+    {
+        $this->dep1 = $dep1;
+        $this->dep2 = $dep2;
+    }
+
+    public function getDep1(): SimpleClass
+    {
+        return $this->dep1;
+    }
+
+    public function getDep2(): ClassWithDependency
+    {
+        return $this->dep2;
+    }
+}
+
+class ClassWithOptionalDependency
+{
+    private ?SimpleClass $dependency;
+
+    public function __construct(SimpleClass $dependency = null)
+    {
+        $this->dependency = $dependency;
+    }
+
+    public function getDependency(): ?SimpleClass
+    {
+        return $this->dependency;
+    }
+}
+
+class ClassWithMixedDependencies
+{
+    private string $value;
+    private SimpleClass $dependency;
+
+    public function __construct(string $value, SimpleClass $dependency)
+    {
+        $this->value = $value;
+        $this->dependency = $dependency;
+    }
+
+    public function getValue(): string
+    {
+        return $this->value;
+    }
+
+    public function getDependency(): SimpleClass
+    {
+        return $this->dependency;
+    }
+}
+
+interface LoggerInterface
+{
+    public function log(string $message): void;
+}
+
+class FileLogger implements LoggerInterface
+{
+    private string $filePath;
+
+    public function __construct(string $filePath)
+    {
+        $this->filePath = $filePath;
+    }
+
+    public function log(string $message): void
+    {
+        // Log implementation
+    }
+
+    public function getFilePath(): string
+    {
+        return $this->filePath;
+    }
+}
+
+class DatabaseLogger implements LoggerInterface
+{
+    private string $host;
+    private string $database;
+
+    public function __construct(string $host, string $database)
+    {
+        $this->host = $host;
+        $this->database = $database;
+    }
+
+    public function log(string $message): void
+    {
+        // Log implementation
+    }
+
+    public function getHost(): string
+    {
+        return $this->host;
+    }
+
+    public function getDatabase(): string
+    {
+        return $this->database;
+    }
+}
+
+class ServiceWithLoggerInterface
+{
+    private LoggerInterface $logger;
+
+    public function __construct(LoggerInterface $logger)
+    {
+        $this->logger = $logger;
+    }
+
+    public function getLogger(): LoggerInterface
+    {
+        return $this->logger;
     }
 }
