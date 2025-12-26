@@ -7,8 +7,6 @@
 Lightweight, fast, PSR-11 compliant **dependency injection container**.  
 This package is a component of the codesaur framework but can be used independently in any PHP project.
 
-**Language:** [Монгол](README.md) | English
-
 ---
 
 ## Table of Contents
@@ -152,7 +150,7 @@ $container->remove(MyService::class);
 - Errors from Reflection  
 - Other internal errors
 
-For detailed information, see [API](API.EN.md) file. (Auto-generated from PHPDoc using Cursor AI)
+For detailed information, see [API](api.md) file. (Auto-generated from PHPDoc using Cursor AI)
 
 ---
 
@@ -544,13 +542,13 @@ vendor/bin/phpunit tests/IntegrationTest.php
 
 ## Code Review
 
-For detailed code review report, see [CODE_REVIEW](CODE_REVIEW.EN.md) file. (Generated using Cursor AI)
+For detailed code review report, see [CODE_REVIEW](code-review.md) file. (Generated using Cursor AI)
 
 ---
 
 ## Changelog
 
-For version history and changes, see [CHANGELOG](CHANGELOG.EN.md) file.
+For version history and changes, see [CHANGELOG](changelog.md) file.
 
 ---
 

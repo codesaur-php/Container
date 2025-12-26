@@ -1,6 +1,6 @@
 # Код Шалгалтын Тайлан
 
-**Хэл:** Монгол | [English](CODE_REVIEW.EN.md)
+**Хэл:** Монгол | [English](../en/code-review.md)
 
 ---
 
@@ -178,6 +178,6 @@ Integration test болон CI/CD pipeline-ийг нэмснээр төсөл о
 
 ## Бусад баримтууд
 
-- [README.md](README.md) - Ерөнхий танилцуулга
-- [API.md](API.md) - API тайлбар
-- [CHANGELOG.md](CHANGELOG.md) - Өөрчлөлтийн түүх
+- [README](README.md) - Ерөнхий танилцуулга
+- [API](api.md) - API тайлбар
+- [CHANGELOG](changelog.md) - Өөрчлөлтийн түүх

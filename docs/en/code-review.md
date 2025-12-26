@@ -1,6 +1,6 @@
 # Code Review Summary
 
-**Language:** [Монгол](CODE_REVIEW.md) | English
+**Language:** [Монгол](../mn/code-review.md) | English
 
 ---
 
@@ -165,6 +165,6 @@ With the addition of integration tests and CI/CD pipeline, the project now has:
 
 ## See Also
 
-- [README](README.EN.md) - General introduction
-- [API](API.EN.md) - API reference
-- [CHANGELOG](CHANGELOG.EN.md) - Changelog
+- [README](README.md) - General introduction
+- [API](api.md) - API reference
+- [CHANGELOG](changelog.md) - Changelog

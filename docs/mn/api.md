@@ -2,7 +2,7 @@
 
 Энэ баримт бичиг нь `codesaur/container` багцын API-ийн бүрэн тайлбарыг агуулна.
 
-**Хэл:** Монгол | [English](API.EN.md)
+**Хэл:** Монгол | [English](../en/api.md)
 
 ---
 
@@ -849,5 +849,5 @@ $logger = $container->get(LoggerInterface::class);
 ## See Also
 
 - [README](README.md) - Ерөнхий танилцуулга, суурилуулалт, хэрэглээ
-- [CODE_REVIEW](CODE_REVIEW.md) - Код шалгалтын тайлан
-- [CHANGELOG](CHANGELOG.md) - Өөрчлөлтийн түүх
+- [CODE_REVIEW](code-review.md) - Код шалгалтын тайлан
+- [CHANGELOG](changelog.md) - Өөрчлөлтийн түүх

@@ -2,7 +2,7 @@
 
 Энэ файлд `codesaur/container` багцын бүх чухал өөрчлөлтүүдийг тэмдэглэнэ.
 
-**Хэл:** Монгол | [English](CHANGELOG.EN.md)
+**Хэл:** Монгол | [English](../en/changelog.md)
 
 Формат нь [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) стандартыг дагаж,
 энэ төсөл [Semantic Versioning](https://semver.org/spec/v2.0.0.html) стандартыг баримтална.
@@ -82,9 +82,9 @@
 
 ## Links
 
-- [README.md](README.md) - Ерөнхий танилцуулга
-- [API.md](API.md) - API бүрэн тайлбар
-- [CODE_REVIEW.md](CODE_REVIEW.md) - Код шалгалтын тайлан
+- [README](README.md) - Ерөнхий танилцуулга
+- [API](api.md) - API бүрэн тайлбар
+- [CODE_REVIEW](code-review.md) - Код шалгалтын тайлан
 
 [3.1.0]: https://github.com/codesaur-php/Container/compare/v3.0.1...v3.1.0
 [3.0.1]: https://github.com/codesaur-php/Container/compare/v3.0.0...v3.0.1

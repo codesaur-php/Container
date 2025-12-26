@@ -2,7 +2,7 @@
 
 This document contains the complete API description for the `codesaur/container` package.
 
-**Language:** [Монгол](API.md) | English
+**Language:** [Монгол](../mn/api.md) | English
 
 ---
 
@@ -760,6 +760,6 @@ $userService = $container->get(UserService::class);
 
 ## See Also
 
-- [README](README.EN.md) - General introduction, installation, usage
-- [CODE_REVIEW](CODE_REVIEW.EN.md) - Code review report
-- [CHANGELOG](CHANGELOG.EN.md) - Changelog
+- [README](README.md) - General introduction, installation, usage
+- [CODE_REVIEW](code-review.md) - Code review report
+- [CHANGELOG](changelog.md) - Changelog
