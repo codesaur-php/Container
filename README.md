@@ -5,13 +5,7 @@
 ![License](https://img.shields.io/badge/License-MIT-green.svg)
 
 Хөнгөн, хурдан, PSR-11 стандартад нийцсэн **dependency injection container**.  
-Энэ багц нь codesaur framework-ийн үндсэн бүрэлдэхүүн боловч ямар ч PHP төслөөс бие даан ашиглах боломжтой.
-
-🌐 **Homepage:** https://codesaur.net  
-📦 **Source:** https://github.com/codesaur-php/Container  
-🏢 **Organization:** https://github.com/codesaur-php
-
----
+Энэ багц нь **codesaur ecosystem**-ийн үндсэн бүрэлдэхүүн боловч ямар ч PHP төслөөс бие даан ашиглах боломжтой.
 
 ### Онцлогууд
 
@@ -24,28 +18,6 @@
 - ✔ Closure / callable дэмжлэг  
 - ✔ Framework-agnostic - Бүх PHP framework-тэй нийцтэй  
 - ✔ Ямар ч гадны нэмэлт хамааралгүй
-
-### Суурилуулалт
-
-```bash
-composer require codesaur/container
-```
-
-**Шаардлага:** PHP 8.2.1+
-
-### Хурдан эхлэл
-
-```php
-use codesaur\Container\Container;
-
-$container = new Container();
-
-// Сервис бүртгэх
-$container->set(MyService::class);
-
-// Сервис авах
-$service = $container->get(MyService::class);
-```
 
 ### Дэлгэрэнгүй мэдээлэл
 
@@ -73,34 +45,18 @@ This package is a component of the codesaur framework but can be used independen
 - ✔ Framework-agnostic - Compatible with all PHP frameworks  
 - ✔ No external dependencies required
 
-### Installation
-
-```bash
-composer require codesaur/container
-```
-
-**Requirements:** PHP 8.2.1+
-
-### Quick Start
-
-```php
-use codesaur\Container\Container;
-
-$container = new Container();
-
-// Register service
-$container->set(MyService::class);
-
-// Get service
-$service = $container->get(MyService::class);
-```
-
 ### Documentation
 
 - 📖 [Full Documentation](docs/en/README.md) - Installation, usage, examples
 - 📚 [API Reference](docs/en/api.md) - Complete API documentation
 - 🔍 [Code Review](docs/en/code-review.md) - Code review report
 - 📝 [Changelog](docs/en/changelog.md) - Version history
+
+---
+
+## Requirements
+
+- PHP 8.2.1+
 
 ---
 
@@ -112,5 +68,6 @@ This project is licensed under the MIT License.
 
 **Narankhuu**  
 📧 codesaur@gmail.com  
-📲 [+976 99000287](https://wa.me/97699000287)  
 🌐 https://github.com/codesaur
+
+🏗️ **codesaur Ecosystem:** https://codesaur.net
