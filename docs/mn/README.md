@@ -1,13 +1,7 @@
 # codesaur/container
 
-![CI](https://github.com/codesaur-php/Container/workflows/CI/badge.svg)
-[![PHP Version](https://img.shields.io/badge/php-%5E8.2.1-777BB4.svg?logo=php)](https://www.php.net/)
-![License](https://img.shields.io/badge/License-MIT-green.svg)
-
 Хөнгөн, хурдан, PSR-11 стандартад нийцсэн **dependency injection container**.  
 Энэ багц нь codesaur framework-ийн үндсэн бүрэлдэхүүн боловч ямар ч PHP төслөөс бие даан ашиглах боломжтой.
-
-**Хэл:** [Монгол](../README.md#монгол-хэл) | [English](../en/README.md)
 
 ---
 
@@ -565,6 +559,4 @@ vendor/bin/phpunit tests/IntegrationTest.php
 ## Зохиогч
 
 **Narankhuu**  
-📧 codesaur@gmail.com  
-📲 [+976 99000287](https://wa.me/97699000287)  
-🌐 https://github.com/codesaur  
+https://github.com/codesaur  

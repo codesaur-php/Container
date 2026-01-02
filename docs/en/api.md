@@ -2,8 +2,6 @@
 
 This document contains the complete API description for the `codesaur/container` package.
 
-**Language:** [Монгол](../mn/api.md) | English
-
 ---
 
 ## Table of Contents

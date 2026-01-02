@@ -2,10 +2,21 @@
 
 This file documents all notable changes to the `codesaur/container` package.
 
-**Language:** [Монгол](../mn/changelog.md) | English
-
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+---
+
+## [3.1.1] - 2026-01-01
+
+### Changed
+- ✅ README.md file restructured into 3 sections with navigation menu
+  - Mongolian description section
+  - English description section
+  - Installation section
+- ✅ Table of contents menu items merged into one line
+- ✅ Requirements & Installation section cleaned up and improved
+- ✅ Documentation files reorganized into `docs/mn/` and `docs/en/` folders, all links updated
 
 ---
 
@@ -74,6 +85,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Version History
 
+- **3.1.1** - README.md file structure improvements
 - **3.1.0** - Auto-wiring, Interface binding, Service aliases features added
 - **3.0.1** - Documentation improvements (English language)
 - **3.0.0** - Stable release
@@ -86,6 +98,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [API](api.md) - API reference
 - [CODE_REVIEW](code-review.md) - Code review
 
+[3.1.1]: https://github.com/codesaur-php/Container/compare/v3.1.0...v3.1.1
 [3.1.0]: https://github.com/codesaur-php/Container/compare/v3.0.1...v3.1.0
 [3.0.1]: https://github.com/codesaur-php/Container/compare/v3.0.0...v3.0.1
 [3.0.0]: https://github.com/codesaur-php/Container/compare/v1.0...v3.0.0

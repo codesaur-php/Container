@@ -4,6 +4,14 @@
 [![PHP Version](https://img.shields.io/badge/php-%5E8.2.1-777BB4.svg?logo=php)](https://www.php.net/)
 ![License](https://img.shields.io/badge/License-MIT-green.svg)
 
+## 📑 Агуулга / Table of Contents
+
+1. [Монгол](#1-монгол-тайлбар) | 2. [English](#2-english-description) | 3. [Installation](#3-installation)
+
+---
+
+## 1. Монгол тайлбар
+
 Хөнгөн, хурдан, PSR-11 стандартад нийцсэн **dependency injection container**.  
 Энэ багц нь **codesaur ecosystem**-ийн үндсэн бүрэлдэхүүн боловч ямар ч PHP төслөөс бие даан ашиглах боломжтой.
 
@@ -28,7 +36,7 @@
 
 ---
 
-## English
+## 2. English description
 
 Lightweight, fast, PSR-11 compliant **dependency injection container**.  
 This package is a component of the codesaur framework but can be used independently in any PHP project.
@@ -54,9 +62,21 @@ This package is a component of the codesaur framework but can be used independen
 
 ---
 
-## Requirements
+## 3. Installation
 
-- PHP 8.2.1+
+### Requirements
+
+- PHP **8.2.1+**
+- Composer
+- Гадны ямар ч dependency шаардлагагүй / No external dependencies required
+
+### Installation
+
+Composer ашиглан суулгана / Install via Composer:
+
+```bash
+composer require codesaur/container
+```
 
 ---
 

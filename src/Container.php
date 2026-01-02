@@ -225,7 +225,7 @@ class Container implements ContainerInterface
         // Бүх alias-үүдийг шалгаж устгах (энэ сервис рүү чиглэсэн)
         $this->aliases = \array_filter($this->aliases, function($target) use ($finalName) {
             return $target !== $finalName;
-        }, ARRAY_FILTER_USE_BOTH);
+        }, \ARRAY_FILTER_USE_BOTH);
         
         // Бодит сервис устгах
         if (isset($this->definitions[$finalName])) {
