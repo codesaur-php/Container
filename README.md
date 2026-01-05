@@ -118,7 +118,7 @@ composer test:coverage
 
 ## Changelog
 
-- 📝 [CHANGELOG.md](CHANGELOG.md) – Full version history
+- 📝 [CHANGELOG.md](CHANGELOG.md) - Full version history
 
 ## Contributing & Security
 

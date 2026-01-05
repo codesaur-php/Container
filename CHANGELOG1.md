@@ -34,7 +34,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - English description section
   - Installation section
 - ✅ Changelog standardized and consolidated into a single English `CHANGELOG.md` file at the repository root
-  - Removed language-specific changelog files
+  - Removed language specific changelog files
   - Established a single source of truth for release history
 - ✅ Table of contents menu items merged into one line
 - ✅ Requirements & Installation section cleaned up and improved
