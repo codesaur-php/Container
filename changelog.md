@@ -7,20 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-## [3.1.1] - 2026-01-01
-
-### Changed
-- ✅ README.md file restructured into 3 sections with navigation menu
-  - Mongolian description section
-  - English description section
-  - Installation section
-- ✅ Table of contents menu items merged into one line
-- ✅ Requirements & Installation section cleaned up and improved
-- ✅ Documentation files reorganized into `docs/mn/` and `docs/en/` folders, all links updated
-
----
-
-## [3.1.0] - 2025-12-26
+## [3.1.0] - 2026-01-05
 
 ### Added
 - ✅ Auto-wiring feature added
@@ -38,9 +25,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - ✅ Auto-wiring tests added
 - ✅ Interface binding tests added
 - ✅ Service aliases tests added
-- ✅ Documentation for auto-wiring, interface binding, and service aliases added to README.md and API.md
-- ✅ Documentation for auto-wiring, interface binding, and service aliases added to README.EN.md and API.EN.md
+- ✅ Documentation for auto-wiring, interface binding, and service aliases added
 - ✅ Implemented features information added to CODE_REVIEW.md and CODE_REVIEW.EN.md
+
+### Changed
+- ✅ README.md file restructured into 3 sections with navigation menu
+  - Mongolian description section
+  - English description section
+  - Installation section
+- ✅ Changelog standardized and consolidated into a single English `CHANGELOG.md` file at the repository root
+  - Removed language-specific changelog files
+  - Established a single source of truth for release history
+- ✅ Table of contents menu items merged into one line
+- ✅ Requirements & Installation section cleaned up and improved
+- ✅ Documentation files reorganized into `docs/mn/` and `docs/en/` folders, all links updated
+
+---
+
+## [3.0.2] - 2025-12-25
 
 ### Changed
 - ✅ All *.md files refactored (unified style)
@@ -78,27 +80,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - ✅ PHP 8.2, 8.3, 8.4 support
 - ✅ Multi-platform support (Ubuntu, Windows)
 
-### Changed
+### Released
 - Stable release
 
 ---
 
-## Version History
-
-- **3.1.1** - README.md file structure improvements
-- **3.1.0** - Auto-wiring, Interface binding, Service aliases features added
-- **3.0.1** - Documentation improvements (English language)
-- **3.0.0** - Stable release
-
----
-
-## Links
-
-- [README](README.md) - General introduction
-- [API](api.md) - API reference
-- [CODE_REVIEW](code-review.md) - Code review
-
-[3.1.1]: https://github.com/codesaur-php/Container/compare/v3.1.0...v3.1.1
-[3.1.0]: https://github.com/codesaur-php/Container/compare/v3.0.1...v3.1.0
+[3.1.0]: https://github.com/codesaur-php/Container/compare/v3.0.2...v3.1.0
+[3.0.2]: https://github.com/codesaur-php/Container/compare/v3.0.1...v3.0.2
 [3.0.1]: https://github.com/codesaur-php/Container/compare/v3.0.0...v3.0.1
 [3.0.0]: https://github.com/codesaur-php/Container/compare/v1.0...v3.0.0

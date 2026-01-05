@@ -841,11 +841,3 @@ $logger = $container->get(LoggerInterface::class);
 5. **Exception Handling**: `try-catch` блок ашиглан алдааг зохих ёсоор боловсруулах
 6. **Service Naming**: Тодорхой, ойлгомжтой нэр ашиглах
 7. **Configuration Management**: Configuration-ийг callable-аар бүртгэх
-
----
-
-## See Also
-
-- [README](README.md) - Ерөнхий танилцуулга, суурилуулалт, хэрэглээ
-- [CODE_REVIEW](code-review.md) - Код шалгалтын тайлан
-- [CHANGELOG](changelog.md) - Өөрчлөлтийн түүх

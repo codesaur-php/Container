@@ -480,7 +480,7 @@ For detailed code review report, see [CODE_REVIEW](code-review.md) file. (Genera
 
 ## Changelog
 
-For version history and changes, see [CHANGELOG](changelog.md) file.
+For version history and changes, see [CHANGELOG](../../CHANGELOG.md) file.
 
 ---
 

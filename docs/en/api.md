@@ -753,11 +753,3 @@ $userService = $container->get(UserService::class);
 6. **Auto-wiring**: Use auto-wiring for automatic dependency resolution
 7. **Interface Binding**: Use interface binding for loose coupling
 8. **Service Aliases**: Use aliases for accessing services by multiple names
-
----
-
-## See Also
-
-- [README](README.md) - General introduction, installation, usage
-- [CODE_REVIEW](code-review.md) - Code review report
-- [CHANGELOG](changelog.md) - Changelog

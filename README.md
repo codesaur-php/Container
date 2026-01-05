@@ -32,7 +32,6 @@
 - 📖 [Бүрэн танилцуулга](docs/mn/README.md) - Суурилуулалт, хэрэглээ, жишээнүүд
 - 📚 [API тайлбар](docs/mn/api.md) - Бүх метод, exception-үүдийн тайлбар
 - 🔍 [Код шалгалт](docs/mn/code-review.md) - Код шалгалтын тайлан
-- 📝 [Changelog](docs/mn/changelog.md) - Өөрчлөлтийн түүх
 
 ---
 
@@ -58,7 +57,6 @@ This package is a component of the **codesaur ecosystem** but can be used indepe
 - 📖 [Full Documentation](docs/en/README.md) - Installation, usage, examples
 - 📚 [API Reference](docs/en/api.md) - Complete API documentation
 - 🔍 [Code Review](docs/en/code-review.md) - Code review report
-- 📝 [Changelog](docs/en/changelog.md) - Version history
 
 ---
 
@@ -117,6 +115,10 @@ composer test:coverage
 ```
 
 ---
+
+## Changelog
+
+- 📝 [CHANGELOG.md](CHANGELOG.md) – Full version history
 
 ## Contributing & Security
 
