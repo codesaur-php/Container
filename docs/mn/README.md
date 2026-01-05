@@ -1,7 +1,7 @@
 # codesaur/container
 
 Хөнгөн, хурдан, PSR-11 стандартад нийцсэн **dependency injection container**.  
-Энэ багц нь codesaur framework-ийн үндсэн бүрэлдэхүүн боловч ямар ч PHP төслөөс бие даан ашиглах боломжтой.
+Энэ багц нь **codesaur ecosystem**-ийн үндсэн бүрэлдэхүүн боловч ямар ч PHP төслөөс бие даан ашиглах боломжтой.
 
 ---
 
@@ -28,11 +28,13 @@
 `codesaur/container` нь PHP 8.2+ орчинд ажиллах **dependency injection container** бөгөөд:
 
 - ✔ PSR-11 `ContainerInterface`-ийг хэрэгжүүлдэг  
-- ✔ Lazy Loading - Сервисүүд зөвхөн шаардлагатай үед (get() дуудагдах үед) үүсгэгдэнэ  
-- ✔ Reflection ашиглан классуудаас автоматаар instance үүсгэнэ  
-- ✔ Closure / callable ашиглан services бүртгэх боломжтой  
-- ✔ Standalone скрипт болон бүх төрлийн PHP төсөлд ашиглахад тохиромжтой  
-- ✔ Framework-agnostic тул codesaur, Laravel, Symfony, Slim болон бусад бүх PHP framework-тэй бүрэн нийцтэй  
+- ✔ Lazy Loading - Сервисүүд зөвхөн шаардлагатай үед үүсгэгдэнэ  
+- ✔ Auto-wiring - Dependency-үүдийг автоматаар resolve хийх  
+- ✔ Interface Binding - Interface-үүдийг implementation-уудтай холбох  
+- ✔ Service Aliases - Нэг сервисийг олон нэрээр авах  
+- ✔ Reflection ашиглан автоматаар instance үүсгэнэ  
+- ✔ Closure / callable дэмжлэг  
+- ✔ Framework-agnostic - Бүх PHP framework-тэй нийцтэй  
 - ✔ Ямар ч гадны нэмэлт хамааралгүй
 
 ---
@@ -49,7 +51,6 @@ composer require codesaur/container
 
 - PHP **8.2.1+**
 - Composer
-- Гадны ямар ч dependency шаардлагагүй
 
 ---
 
@@ -396,79 +397,34 @@ php -S localhost:9080 -t example
 
 ## Тест ажиллуулах
 
-Энэ төсөлд PHPUnit ашиглан unit test болон integration test-үүд бий. Тестүүдийг ажиллуулахын тулд:
+Энэ төсөлд PHPUnit ашиглан unit test болон integration test-үүд бий.
 
-### 1. Composer dependencies суулгах
-
-#### Windows (Command Prompt)
-
-```cmd
-composer install
-```
-
-#### Linux / macOS (Terminal)
+### Dependencies суулгах
 
 ```bash
 composer install
 ```
 
-Энэ нь PHPUnit болон бусад dev dependencies-ийг суулгана.
+### Тест ажиллуулах
 
-### 2. Тест ажиллуулах
-
-#### Windows (Command Prompt)
-
-```cmd
-# Бүх тестүүдийг ажиллуулах
-vendor\bin\phpunit.bat
-
-# Тодорхой тест файл ажиллуулах
-vendor\bin\phpunit.bat tests\ContainerTest.php
-
-# Integration test ажиллуулах
-vendor\bin\phpunit.bat tests\IntegrationTest.php
-```
-
-#### Linux / macOS (Terminal)
+#### Composer Script ашиглах
 
 ```bash
-# Бүх тестүүдийг ажиллуулах
-vendor/bin/phpunit
-
-# Тодорхой тест файл ажиллуулах
-vendor/bin/phpunit tests/ContainerTest.php
-
-# Integration test ажиллуулах
-vendor/bin/phpunit tests/IntegrationTest.php
+composer test              # Бүх тестүүдийг ажиллуулах
+composer test:coverage     # Coverage-тэй тест ажиллуулах
 ```
 
-### 3. Тест coverage харах
-
-#### Windows (Command Prompt)
-
-```cmd
-vendor\bin\phpunit.bat --coverage-text
-```
-
-#### Linux / macOS (Terminal)
+#### PHPUnit шууд ашиглах
 
 ```bash
-vendor/bin/phpunit --coverage-text
+vendor/bin/phpunit                                    # Бүх тестүүдийг ажиллуулах
+vendor/bin/phpunit tests/ContainerTest.php          # Тодорхой тест файл ажиллуулах
+vendor/bin/phpunit tests/IntegrationTest.php         # Integration test ажиллуулах
+vendor/bin/phpunit --coverage-text                   # Тест coverage харах
+vendor/bin/phpunit --filter testSetAndGet tests/ContainerTest.php  # Тодорхой method ажиллуулах
 ```
 
-### 4. Тодорхой тест method ажиллуулах
-
-#### Windows (Command Prompt)
-
-```cmd
-vendor\bin\phpunit.bat --filter testSetAndGet tests\ContainerTest.php
-```
-
-#### Linux / macOS (Terminal)
-
-```bash
-vendor/bin/phpunit --filter testSetAndGet tests/ContainerTest.php
-```
+**Windows хэрэглэгчид:** `vendor/bin/phpunit`-ийг `vendor\bin\phpunit.bat` гэж солино
 
 ### Тестүүдийн бүтэц
 
@@ -477,7 +433,8 @@ vendor/bin/phpunit --filter testSetAndGet tests/ContainerTest.php
 - `tests/NotFoundExceptionTest.php` - NotFoundException классын test-үүд
 - `tests/IntegrationTest.php` - Integration test-үүд (бодит хэрэглээний сценариуд)
 
-Тестүүд нь дараах зүйлсийг шалгана:
+### Тестүүд юу шалгадаг
+
 - ✅ Service бүртгэх, авах үйлдлүүд
 - ✅ Constructor аргументууд дамжуулах
 - ✅ Exception handling
@@ -513,28 +470,7 @@ CI статусыг GitHub repository-ийн Actions tab-аас харж бол�
 
 ### Локал дээр CI-тэй ижил тест ажиллуулах
 
-CI дээр ажиллаж буй тестүүдийг локал дээр ажиллуулах:
-
-#### Windows (Command Prompt)
-
-```cmd
-vendor\bin\phpunit.bat
-vendor\bin\phpunit.bat --coverage-text
-vendor\bin\phpunit.bat tests\IntegrationTest.php
-```
-
-#### Linux / macOS (Terminal)
-
-```bash
-# Бүх тестүүдийг ажиллуулах
-vendor/bin/phpunit
-
-# Coverage-тэй ажиллуулах
-vendor/bin/phpunit --coverage-text
-
-# Тодорхой тест файл ажиллуулах
-vendor/bin/phpunit tests/IntegrationTest.php
-```
+CI дээр ажиллаж буй тестүүдийг локал дээр ажиллуулахын тулд дээрх [Тест ажиллуулах](#тест-ажиллуулах) хэсэгт байгаа командуудыг ашиглана уу.
 
 ---
 

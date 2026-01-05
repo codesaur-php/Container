@@ -4,9 +4,9 @@
 [![PHP Version](https://img.shields.io/badge/php-%5E8.2.1-777BB4.svg?logo=php)](https://www.php.net/)
 ![License](https://img.shields.io/badge/License-MIT-green.svg)
 
-## 📑 Агуулга / Table of Contents
+## Агуулга / Table of Contents
 
-1. [Монгол](#1-монгол-тайлбар) | 2. [English](#2-english-description) | 3. [Installation](#3-installation)
+1. [Монгол](#1-монгол-тайлбар) | 2. [English](#2-english-description) | 3. [Getting Started](#3-getting-started)
 
 ---
 
@@ -19,7 +19,7 @@
 
 - ✔ PSR-11 `ContainerInterface`-ийг хэрэгжүүлдэг  
 - ✔ Lazy Loading - Сервисүүд зөвхөн шаардлагатай үед үүсгэгдэнэ  
-- ✔ Auto-wiring - Автоматаар dependency resolve хийх  
+- ✔ Auto-wiring - Dependency-үүдийг автоматаар resolve хийх  
 - ✔ Interface Binding - Interface-үүдийг implementation-уудтай холбох  
 - ✔ Service Aliases - Нэг сервисийг олон нэрээр авах  
 - ✔ Reflection ашиглан автоматаар instance үүсгэнэ  
@@ -39,7 +39,7 @@
 ## 2. English description
 
 Lightweight, fast, PSR-11 compliant **dependency injection container**.  
-This package is a component of the codesaur framework but can be used independently in any PHP project.
+This package is a component of the **codesaur ecosystem** but can be used independently in any PHP project.
 
 ### Features
 
@@ -62,13 +62,12 @@ This package is a component of the codesaur framework but can be used independen
 
 ---
 
-## 3. Installation
+## 3. Getting Started
 
 ### Requirements
 
 - PHP **8.2.1+**
 - Composer
-- Гадны ямар ч dependency шаардлагагүй / No external dependencies required
 
 ### Installation
 
@@ -78,7 +77,51 @@ Composer ашиглан суулгана / Install via Composer:
 composer require codesaur/container
 ```
 
+### Quick Example
+
+```php
+use codesaur\Container\Container;
+
+// Контейнер үүсгэх / Create container
+$container = new Container();
+
+// Класс бүртгэх / Register class
+$container->set(MyService::class);
+
+// Параметртэй класс бүртгэх / Register class with parameters
+$container->set(Printer::class, ['Hello, World!']);
+
+// Сервис авах / Get service
+$service = $container->get(MyService::class);
+$printer = $container->get(Printer::class);
+
+// Сервис байгаа эсэхийг шалгах / Check if service exists
+if ($container->has(MyService::class)) {
+    // ...
+}
+
+// Сервис ашиглах / Use service
+$printer->print(); // Output: Hello, World!
+```
+
+### Running Tests
+
+Тест ажиллуулах / Run tests:
+
+```bash
+# Бүх тестүүдийг ажиллуулах / Run all tests
+composer test
+
+# Coverage-тэй тест ажиллуулах / Run tests with coverage
+composer test:coverage
+```
+
 ---
+
+## Contributing & Security
+
+- 🤝 [Contributing Guide](.github/CONTRIBUTING.md)
+- 🔐 [Security Policy](.github/SECURITY.md)
 
 ## License
 

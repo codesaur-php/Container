@@ -1,7 +1,7 @@
 # codesaur/container
 
 Lightweight, fast, PSR-11 compliant **dependency injection container**.  
-This package is a component of the codesaur framework but can be used independently in any PHP project.
+This package is a component of the **codesaur ecosystem** but can be used independently in any PHP project.
 
 ---
 
@@ -28,11 +28,13 @@ This package is a component of the codesaur framework but can be used independen
 `codesaur/container` is a **dependency injection container** that runs in PHP 8.2+ environments:
 
 - ✔ Implements PSR-11 `ContainerInterface`  
-- ✔ Lazy Loading - Services are created only when needed (when `get()` is called)  
+- ✔ Lazy Loading - Services are created only when needed  
+- ✔ Auto-wiring - Automatic dependency resolution  
+- ✔ Interface Binding - Bind interfaces to implementations  
+- ✔ Service Aliases - Access one service by multiple names  
 - ✔ Automatically creates instances from classes using Reflection  
-- ✔ Supports registering services using Closure / callable  
-- ✔ Suitable for standalone scripts and all types of PHP projects  
-- ✔ Framework-agnostic, fully compatible with codesaur, Laravel, Symfony, Slim, and all other PHP frameworks  
+- ✔ Closure / callable support  
+- ✔ Framework-agnostic - Compatible with all PHP frameworks  
 - ✔ No external dependencies required
 
 ---
@@ -49,7 +51,6 @@ Requirements:
 
 - PHP **8.2.1+**
 - Composer
-- No external dependencies required
 
 ---
 
@@ -394,79 +395,34 @@ php -S localhost:9080 -t example
 
 ## Running Tests
 
-This project includes unit tests and integration tests using PHPUnit. To run tests:
+This project includes unit tests and integration tests using PHPUnit.
 
-### 1. Install Composer Dependencies
-
-#### Windows (Command Prompt)
-
-```cmd
-composer install
-```
-
-#### Linux / macOS (Terminal)
+### Install Dependencies
 
 ```bash
 composer install
 ```
 
-This will install PHPUnit and other dev dependencies.
+### Run Tests
 
-### 2. Run Tests
-
-#### Windows (Command Prompt)
-
-```cmd
-# Run all tests
-vendor\bin\phpunit.bat
-
-# Run specific test file
-vendor\bin\phpunit.bat tests\ContainerTest.php
-
-# Run integration test
-vendor\bin\phpunit.bat tests\IntegrationTest.php
-```
-
-#### Linux / macOS (Terminal)
+#### Using Composer Scripts (Recommended)
 
 ```bash
-# Run all tests
-vendor/bin/phpunit
-
-# Run specific test file
-vendor/bin/phpunit tests/ContainerTest.php
-
-# Run integration test
-vendor/bin/phpunit tests/IntegrationTest.php
+composer test              # Run all tests
+composer test:coverage     # Run tests with coverage
 ```
 
-### 3. View Test Coverage
-
-#### Windows (Command Prompt)
-
-```cmd
-vendor\bin\phpunit.bat --coverage-text
-```
-
-#### Linux / macOS (Terminal)
+#### Using PHPUnit Directly
 
 ```bash
-vendor/bin/phpunit --coverage-text
+vendor/bin/phpunit                                    # Run all tests
+vendor/bin/phpunit tests/ContainerTest.php          # Run specific test file
+vendor/bin/phpunit tests/IntegrationTest.php        # Run integration test
+vendor/bin/phpunit --coverage-text                   # View test coverage
+vendor/bin/phpunit --filter testSetAndGet tests/ContainerTest.php  # Run specific method
 ```
 
-### 4. Run Specific Test Method
-
-#### Windows (Command Prompt)
-
-```cmd
-vendor\bin\phpunit.bat --filter testSetAndGet tests\ContainerTest.php
-```
-
-#### Linux / macOS (Terminal)
-
-```bash
-vendor/bin/phpunit --filter testSetAndGet tests/ContainerTest.php
-```
+**Windows users:** Replace `vendor/bin/phpunit` with `vendor\bin\phpunit.bat`
 
 ### Test Structure
 
@@ -475,7 +431,8 @@ vendor/bin/phpunit --filter testSetAndGet tests/ContainerTest.php
 - `tests/NotFoundExceptionTest.php` - Tests for NotFoundException class
 - `tests/IntegrationTest.php` - Integration tests (real-world usage scenarios)
 
-Tests verify:
+### What Tests Verify
+
 - ✅ Service registration and retrieval operations
 - ✅ Constructor argument passing
 - ✅ Exception handling
@@ -511,28 +468,7 @@ CI status can be viewed in the GitHub repository's Actions tab.
 
 ### Running CI Tests Locally
 
-To run the same tests that run on CI locally:
-
-#### Windows (Command Prompt)
-
-```cmd
-vendor\bin\phpunit.bat
-vendor\bin\phpunit.bat --coverage-text
-vendor\bin\phpunit.bat tests\IntegrationTest.php
-```
-
-#### Linux / macOS (Terminal)
-
-```bash
-# Run all tests
-vendor/bin/phpunit
-
-# Run with coverage
-vendor/bin/phpunit --coverage-text
-
-# Run specific test file
-vendor/bin/phpunit tests/IntegrationTest.php
-```
+To run the same tests that run on CI locally, use the commands from the [Running Tests](#running-tests) section above.
 
 ---
 
