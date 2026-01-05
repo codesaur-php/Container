@@ -88,4 +88,4 @@ For security-related issues, please follow the instructions in
 
 ---
 
-Thank you for helping improve the **codesaur ecosystem** 🚀
+Thank you for helping improve the **codesaur ecosystem** 🦖
