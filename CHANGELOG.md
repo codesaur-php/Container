@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [3.1.1] - 2026-01-06
+[3.1.1]: https://github.com/codesaur-php/Container/compare/v3.1.0...v3.1.1
+
+### Added
+- ✅ Added initial release (v1.0) information to changelog
+  
+### Fixed
+- ✅ Fixed small documentation errors and inconsistencies
+
+---
+
 ## [3.1.0] - 2026-01-05
 [3.1.0]: https://github.com/codesaur-php/Container/compare/v3.0.2...v3.1.0
 
