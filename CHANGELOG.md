@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ---
 
 ## [3.1.0] - 2026-01-05
+[3.1.0]: https://github.com/codesaur-php/Container/compare/v3.0.2...v3.1.0
 
 ### Added
 - ✅ Auto-wiring feature added
@@ -43,6 +44,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ---
 
 ## [3.0.2] - 2025-12-25
+[3.0.2]: https://github.com/codesaur-php/Container/compare/v3.0.1...v3.0.2
 
 ### Changed
 - ✅ All *.md files refactored (unified style)
@@ -51,6 +53,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ---
 
 ## [3.0.1] - 2025-12-25
+[3.0.1]: https://github.com/codesaur-php/Container/compare/v3.0.0...v3.0.1
 
 ### Added
 - ✅ English documentation added
@@ -66,15 +69,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ---
 
 ## [3.0.0] - 2025-12-18
+[3.0.0]: https://github.com/codesaur-php/Container/compare/v1.0...v3.0.0
 
 ### Added
 - ✅ Full PSR-11 `ContainerInterface` standard implementation
 - ✅ Lazy Loading mechanism - Services are created only when needed
 - ✅ Automatic instance creation using Reflection
-- ✅ Closure / callable support
-- ✅ Singleton pattern (cached instances)
-- ✅ `set()`, `get()`, `has()`, `remove()` methods
-- ✅ `NotFoundException` and `ContainerException` exception classes
 - ✅ Unit tests and Integration tests
 - ✅ CI/CD pipeline (GitHub Actions)
 - ✅ PHP 8.2, 8.3, 8.4 support
@@ -83,7 +83,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Released
 - Stable release
 
-[3.1.0]: https://github.com/codesaur-php/Container/compare/v3.0.2...v3.1.0
-[3.0.2]: https://github.com/codesaur-php/Container/compare/v3.0.1...v3.0.2
-[3.0.1]: https://github.com/codesaur-php/Container/compare/v3.0.0...v3.0.1
-[3.0.0]: https://github.com/codesaur-php/Container/compare/v1.0...v3.0.0
+---
+
+## [1.0] - 2021-09-10
+[1.0]: https://github.com/codesaur-php/Container/releases/tag/v1.0
+
+### Added
+- ✅ Closure / callable support
+- ✅ Singleton pattern (cached instances)
+- ✅ `set()`, `get()`, `has()`, `remove()` methods
+- ✅ `NotFoundException` and `ContainerException` exception classes
+
+### Released
+- Initial release
