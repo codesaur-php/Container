@@ -27,15 +27,15 @@ This package is a component of the **codesaur ecosystem** but can be used indepe
 
 `codesaur/container` is a **dependency injection container** that runs in PHP 8.2+ environments:
 
-- ✔ Implements PSR-11 `ContainerInterface`  
-- ✔ Lazy Loading - Services are created only when needed  
-- ✔ Auto-wiring - Automatic dependency resolution  
-- ✔ Interface Binding - Bind interfaces to implementations  
-- ✔ Service Aliases - Access one service by multiple names  
-- ✔ Automatically creates instances from classes using Reflection  
-- ✔ Closure / callable support  
-- ✔ Framework-agnostic - Compatible with all PHP frameworks  
-- ✔ No external dependencies required
+- Implements PSR-11 `ContainerInterface`  
+- Lazy Loading - Services are created only when needed  
+- Auto-wiring - Automatic dependency resolution  
+- Interface Binding - Bind interfaces to implementations  
+- Service Aliases - Access one service by multiple names  
+- Automatically creates instances from classes using Reflection  
+- Closure / callable support  
+- Framework-agnostic - Compatible with all PHP frameworks  
+- No external dependencies required
 
 ---
 
@@ -157,9 +157,9 @@ This container supports **lazy loading** mechanism. This means:
 
 ### Benefits
 
-- ⚡ **Performance**: Heavy services are created only when needed
-- 💾 **Memory**: Unused services don't consume memory
-- 🎯 **Optimal Usage**: Only services being used are created
+- **Performance**: Heavy services are created only when needed
+- **Memory**: Unused services don't consume memory
+- **Optimal Usage**: Only services being used are created
 
 ### How It Works
 
@@ -226,9 +226,9 @@ $userService = $container->get(UserService::class);
 ```
 
 **Benefits of Auto-wiring:**
-- ⚡ **Easy to use**: No need to manually pass dependencies
-- 🎯 **Automatic**: Automatically resolves and injects from class type hints
-- 🔄 **Flexible**: User-provided arguments take precedence over auto-wiring
+- **Easy to use**: No need to manually pass dependencies
+- **Automatic**: Automatically resolves and injects from class type hints
+- **Flexible**: User-provided arguments take precedence over auto-wiring
 
 **Notes:**
 - Auto-wiring only works for parameters with **class type hints**
@@ -323,10 +323,10 @@ $logger3 = $container->get('app.logger');
 ```
 
 **Benefits of Aliases:**
-- 🎯 **Multiple names**: Access one service by multiple names
-- 🔄 **Singleton**: All aliases return the same instance
-- ✅ **Interface binding**: Works together with interface binding
-- ⚡ **Easy**: Easy to register using `alias()` method
+- **Multiple names**: Access one service by multiple names
+- **Singleton**: All aliases return the same instance
+- **Interface binding**: Works together with interface binding
+- **Easy**: Easy to register using `alias()` method
 
 **Notes:**
 - Service must be registered before creating an alias
@@ -375,9 +375,9 @@ $service = $container->get(UserService::class);
 ```
 
 **Benefits of Interface Binding:**
-- 🎯 **Loose Coupling**: Use interfaces to avoid dependency on implementations
-- 🔄 **Flexible**: Easy to swap implementations
-- ✅ **Auto-wiring**: Works together with auto-wiring
+- **Loose Coupling**: Use interfaces to avoid dependency on implementations
+- **Flexible**: Easy to swap implementations
+- **Auto-wiring**: Works together with auto-wiring
 
 ---
 
@@ -433,15 +433,15 @@ vendor/bin/phpunit --filter testSetAndGet tests/ContainerTest.php  # Run specifi
 
 ### What Tests Verify
 
-- ✅ Service registration and retrieval operations
-- ✅ Constructor argument passing
-- ✅ Exception handling
-- ✅ Callable/closure support
-- ✅ Lazy loading (service created only when `get()` is called)
-- ✅ Instance caching (singleton behavior)
-- ✅ PSR-11 standard compliance
-- ✅ Edge cases (optional parameters, no constructor, etc.)
-- ✅ Integration tests (real application scenarios, dependency chain, service replacement, etc.)
+- Service registration and retrieval operations
+- Constructor argument passing
+- Exception handling
+- Callable/closure support
+- Lazy loading (service created only when `get()` is called)
+- Instance caching (singleton behavior)
+- PSR-11 standard compliance
+- Edge cases (optional parameters, no constructor, etc.)
+- Integration tests (real application scenarios, dependency chain, service replacement, etc.)
 
 ---
 
@@ -453,10 +453,10 @@ This project has a CI/CD pipeline configured using GitHub Actions.
 
 GitHub Actions workflow performs:
 
-- ✅ **Multi-version PHP testing**: Tests on PHP 8.2, 8.3, 8.4
-- ✅ **Multi-platform testing**: Tests on Ubuntu and Windows
-- ✅ **Code coverage**: Sends coverage report to Codecov
-- ✅ **Syntax check**: PHP file syntax checking
+- **Multi-version PHP testing**: Tests on PHP 8.2, 8.3, 8.4
+- **Multi-platform testing**: Tests on Ubuntu and Windows
+- **Code coverage**: Sends coverage report to Codecov
+- **Syntax check**: PHP file syntax checking
 
 ### CI Status
 

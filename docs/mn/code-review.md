@@ -22,10 +22,10 @@
 ### Container.php
 
 #### Эерэг Талууд:
-- ✅ ReflectionClass-ийг зөв ашиглаж instance үүсгэх
-- ✅ Сайн салангид асуудал (separation of concerns)
-- ✅ Ойлгомжтой алдааны мессежүүд
-- ✅ Singleton-тэй төстэй зан үйл (олон `get()` дуудлагад ижил instance буцаах)
+- ReflectionClass-ийг зөв ашиглаж instance үүсгэх
+- Сайн салангид асуудал (separation of concerns)
+- Ойлгомжтой алдааны мессежүүд
+- Singleton-тэй төстэй зан үйл (олон `get()` дуудлагад ижил instance буцаах)
 
 #### Ажиглалт ба Санал:
 
@@ -51,9 +51,9 @@
 
 ### ContainerException.php & NotFoundException.php
 
-- ✅ Exception-ийг зөв өргөтгөсөн
-- ✅ Зөв PSR-11 interface-үүдийг хэрэгжүүлсэн
-- ✅ Цэвэр, хамгийн бага (байх ёстой байдлаар)
+- Exception-ийг зөв өргөтгөсөн
+- Зөв PSR-11 interface-үүдийг хэрэгжүүлсэн
+- Цэвэр, хамгийн бага (байх ёстой байдлаар)
 
 ---
 
@@ -61,7 +61,7 @@
 
 ### Auto-wiring (Автомат Dependency Resolution)
 
-✅ **Хэрэгжүүлсэн**: Container нь constructor-ын параметрүүдэд class type hint байвал container-ээс автоматаар dependency resolve хийх механизмтай болсон.
+**Хэрэгжүүлсэн**: Container нь constructor-ын параметрүүдэд class type hint байвал container-ээс автоматаар dependency resolve хийх механизмтай болсон.
 
 **Онцлогууд:**
 - Constructor-ын class type hint-ээс автоматаар dependency олдож inject хийгдэнэ
@@ -74,7 +74,7 @@
 
 ### Interface Binding
 
-✅ **Хэрэгжүүлсэн**: Interface-үүдийг implementation-уудтай холбох дэмжлэг нэмэгдсэн.
+**Хэрэгжүүлсэн**: Interface-үүдийг implementation-уудтай холбох дэмжлэг нэмэгдсэн.
 
 **Онцлогууд:**
 - `bind()` метод ашиглан interface-ийг implementation-тай холбох боломжтой
@@ -86,7 +86,7 @@
 
 ### Service Aliases
 
-✅ **Хэрэгжүүлсэн**: Дотоод alias дэмжлэг нэмэгдсэн.
+**Хэрэгжүүлсэн**: Дотоод alias дэмжлэг нэмэгдсэн.
 
 **Онцлогууд:**
 - `alias()` метод ашиглан нэг сервисийг олон нэрээр авах боломжтой
@@ -104,30 +104,30 @@
 
 Unit test-үүд дараах зүйлсийг хамарсан:
 
-- ✅ Үндсэн бүртгэл ба авах
-- ✅ Constructor аргумент дамжуулах
-- ✅ Exception боловсруулалт
-- ✅ Callable/closure дэмжлэг
-- ✅ PSR-11 нийцтэй байдал
-- ✅ Edge case-үүд (optional parameters, constructor байхгүй, гэх мэт)
-- ✅ Exception класс тест-үүд
-- ✅ Lazy loading зан үйл (сервисүүд `get()` дуудагдах хүртэл үүсгэгдэхгүй)
-- ✅ Instance кэшлэлт (эхний `get()`-ийн дараа singleton behavior)
-- ✅ Auto-wiring функц (автомат dependency resolution)
-- ✅ Interface binding функц (interface-ийг implementation-тай холбох)
-- ✅ Service aliases функц (нэг сервисийг олон нэрээр авах)
+- Үндсэн бүртгэл ба авах
+- Constructor аргумент дамжуулах
+- Exception боловсруулалт
+- Callable/closure дэмжлэг
+- PSR-11 нийцтэй байдал
+- Edge case-үүд (optional parameters, constructor байхгүй, гэх мэт)
+- Exception класс тест-үүд
+- Lazy loading зан үйл (сервисүүд `get()` дуудагдах хүртэл үүсгэгдэхгүй)
+- Instance кэшлэлт (эхний `get()`-ийн дараа singleton behavior)
+- Auto-wiring функц (автомат dependency resolution)
+- Interface binding функц (interface-ийг implementation-тай холбох)
+- Service aliases функц (нэг сервисийг олон нэрээр авах)
 
 ### Integration Test-үүд
 
 Integration test-үүд (`tests/IntegrationTest.php`) нь контейнер бодит application сценариуудад зөв ажиллаж байгааг баталгаажуулахын тулд нэмэгдсэн:
 
-- ✅ **Бүрэн application setup**: Олон хамааралтай сервисүүдтэй бүрэн application bootstrap сценари тест хийх
-- ✅ **Service replacement**: Сервис устгах, дахин бүртгэх зөв ажиллаж байгааг баталгаажуулах
-- ✅ **Singleton behavior сервисүүдийн дунд**: Хуваалцсан сервисүүд олон хэрэглэгч ашиглах үед singleton pattern-ийг хадгалж байгааг баталгаажуулах
-- ✅ **Нарийн dependency chain-үүд**: Олон түвшний dependency resolution тест хийх
-- ✅ **Холимог бүртгэлийн төрлүүд**: Класс болон callable-д суурилсан бүртгэлүүд хамтдаа ажиллаж байгааг баталгаажуулах
-- ✅ **Dependency chain дахь алдаа боловсруулалт**: Dependency-үүд дутуу байх үед зөв алдаа тараахыг тест хийх
-- ✅ **Нарийн сценариуудад lazy loading**: Lazy loading нарийн dependency харилцаатай зөв ажиллаж байгааг баталгаажуулах
+- **Бүрэн application setup**: Олон хамааралтай сервисүүдтэй бүрэн application bootstrap сценари тест хийх
+- **Service replacement**: Сервис устгах, дахин бүртгэх зөв ажиллаж байгааг баталгаажуулах
+- **Singleton behavior сервисүүдийн дунд**: Хуваалцсан сервисүүд олон хэрэглэгч ашиглах үед singleton pattern-ийг хадгалж байгааг баталгаажуулах
+- **Нарийн dependency chain-үүд**: Олон түвшний dependency resolution тест хийх
+- **Холимог бүртгэлийн төрлүүд**: Класс болон callable-д суурилсан бүртгэлүүд хамтдаа ажиллаж байгааг баталгаажуулах
+- **Dependency chain дахь алдаа боловсруулалт**: Dependency-үүд дутуу байх үед зөв алдаа тараахыг тест хийх
+- **Нарийн сценариуудад lazy loading**: Lazy loading нарийн dependency харилцаатай зөв ажиллаж байгааг баталгаажуулах
 
 ---
 
@@ -153,11 +153,11 @@ GitHub Actions (`.github/workflows/ci.yml`) ашиглан бүрэн CI/CD pipe
 
 ### Давуу Талууд
 
-- ✅ **Автомат тест**: Бүх тест-үүд push/PR бүр дээр автоматаар ажиллана
-- ✅ **Олон хувилбарын нийцтэй байдал**: PHP 8.2-8.4 дээр код ажиллаж байгааг баталгаажуулна
-- ✅ **Cross-platform дэмжлэг**: Linux болон Windows дээр нийцтэй байдлыг баталгаажуулна
-- ✅ **Код чанар**: Синтакс шалгалт нь үндсэн алдаануудыг нэгтгэхээс сэргийлнэ
-- ✅ **Coverage хянах**: Codecov интеграци нь цаг хугацааны явцад тест coverage-ийг хянана
+- **Автомат тест**: Бүх тест-үүд push/PR бүр дээр автоматаар ажиллана
+- **Олон хувилбарын нийцтэй байдал**: PHP 8.2-8.4 дээр код ажиллаж байгааг баталгаажуулна
+- **Cross-platform дэмжлэг**: Linux болон Windows дээр нийцтэй байдлыг баталгаажуулна
+- **Код чанар**: Синтакс шалгалт нь үндсэн алдаануудыг нэгтгэхээс сэргийлнэ
+- **Coverage хянах**: Codecov интеграци нь цаг хугацааны явцад тест coverage-ийг хянана
 
 ---
 

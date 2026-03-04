@@ -11,10 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [3.1.1]: https://github.com/codesaur-php/Container/compare/v3.1.0...v3.1.1
 
 ### Added
-- ✅ Added initial release (v1.0) information to changelog
+- Added initial release (v1.0) information to changelog
   
 ### Fixed
-- ✅ Fixed small documentation errors and inconsistencies
+- Fixed small documentation errors and inconsistencies
 
 ---
 
@@ -22,35 +22,35 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [3.1.0]: https://github.com/codesaur-php/Container/compare/v3.0.2...v3.1.0
 
 ### Added
-- ✅ Auto-wiring feature added
+- Auto-wiring feature added
   - Automatically resolves dependencies from container when constructor parameters have class type hints
   - User-provided arguments take priority over auto-wiring
   - Uses default values for optional parameters
-- ✅ Interface binding feature added
+- Interface binding feature added
   - Ability to bind interfaces to implementations (`bind()` method)
   - Getting interface returns implementation instance
   - Works together with auto-wiring
-- ✅ Service aliases support added
+- Service aliases support added
   - Ability to access one service by multiple names (`alias()` method)
   - All aliases return the same instance (singleton behavior)
   - Works together with interface binding
-- ✅ Auto-wiring tests added
-- ✅ Interface binding tests added
-- ✅ Service aliases tests added
-- ✅ Documentation for auto-wiring, interface binding, and service aliases added
-- ✅ Implemented features information added to CODE_REVIEW.md and CODE_REVIEW.EN.md
+- Auto-wiring tests added
+- Interface binding tests added
+- Service aliases tests added
+- Documentation for auto-wiring, interface binding, and service aliases added
+- Implemented features information added to CODE_REVIEW.md and CODE_REVIEW.EN.md
 
 ### Changed
-- ✅ README.md file restructured into 3 sections with navigation menu
+- README.md file restructured into 3 sections with navigation menu
   - Mongolian description section
   - English description section
   - Installation section
-- ✅ Changelog standardized and consolidated into a single English `CHANGELOG.md` file at the repository root
+- Changelog standardized and consolidated into a single English `CHANGELOG.md` file at the repository root
   - Removed language specific changelog files
   - Established a single source of truth for release history
-- ✅ Table of contents menu items merged into one line
-- ✅ Requirements & Installation section cleaned up and improved
-- ✅ Documentation files reorganized into `docs/mn/` and `docs/en/` folders, all links updated
+- Table of contents menu items merged into one line
+- Requirements & Installation section cleaned up and improved
+- Documentation files reorganized into `docs/mn/` and `docs/en/` folders, all links updated
 
 ---
 
@@ -58,8 +58,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [3.0.2]: https://github.com/codesaur-php/Container/compare/v3.0.1...v3.0.2
 
 ### Changed
-- ✅ All *.md files refactored (unified style)
-- ✅ Markdown syntax errors fixed
+- All *.md files refactored (unified style)
+- Markdown syntax errors fixed
 
 ---
 
@@ -67,12 +67,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [3.0.1]: https://github.com/codesaur-php/Container/compare/v3.0.0...v3.0.1
 
 ### Added
-- ✅ English documentation added
+- English documentation added
   - `README.EN.md` - General introduction, installation, usage
   - `API.EN.md` - API reference
   - `CODE_REVIEW.EN.md` - Code review report
   - `CHANGELOG.EN.md` - Changelog
-- ✅ Language links between Mongolian and English files
+- Language links between Mongolian and English files
 
 ### Changed
 - Documentation improvements
@@ -83,13 +83,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [3.0.0]: https://github.com/codesaur-php/Container/compare/v1.0...v3.0.0
 
 ### Added
-- ✅ Full PSR-11 `ContainerInterface` standard implementation
-- ✅ Lazy Loading mechanism - Services are created only when needed
-- ✅ Automatic instance creation using Reflection
-- ✅ Unit tests and Integration tests
-- ✅ CI/CD pipeline (GitHub Actions)
-- ✅ PHP 8.2, 8.3, 8.4 support
-- ✅ Multi-platform support (Ubuntu, Windows)
+- Full PSR-11 `ContainerInterface` standard implementation
+- Lazy Loading mechanism - Services are created only when needed
+- Automatic instance creation using Reflection
+- Unit tests and Integration tests
+- CI/CD pipeline (GitHub Actions)
+- PHP 8.2, 8.3, 8.4 support
+- Multi-platform support (Ubuntu, Windows)
 
 ### Released
 - Stable release
@@ -100,10 +100,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [1.0]: https://github.com/codesaur-php/Container/releases/tag/v1.0
 
 ### Added
-- ✅ Closure / callable support
-- ✅ Singleton pattern (cached instances)
-- ✅ `set()`, `get()`, `has()`, `remove()` methods
-- ✅ `NotFoundException` and `ContainerException` exception classes
+- Closure / callable support
+- Singleton pattern (cached instances)
+- `set()`, `get()`, `has()`, `remove()` methods
+- `NotFoundException` and `ContainerException` exception classes
 
 ### Released
 - Initial release

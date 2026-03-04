@@ -27,15 +27,15 @@
 
 `codesaur/container` нь PHP 8.2+ орчинд ажиллах **dependency injection container** бөгөөд:
 
-- ✔ PSR-11 `ContainerInterface`-ийг хэрэгжүүлдэг  
-- ✔ Lazy Loading - Сервисүүд зөвхөн шаардлагатай үед үүсгэгдэнэ  
-- ✔ Auto-wiring - Dependency-үүдийг автоматаар resolve хийх  
-- ✔ Interface Binding - Interface-үүдийг implementation-уудтай холбох  
-- ✔ Service Aliases - Нэг сервисийг олон нэрээр авах  
-- ✔ Reflection ашиглан автоматаар instance үүсгэнэ  
-- ✔ Closure / callable дэмжлэг  
-- ✔ Framework-agnostic - Бүх PHP framework-тэй нийцтэй  
-- ✔ Ямар ч гадны нэмэлт хамааралгүй
+- PSR-11 `ContainerInterface`-ийг хэрэгжүүлдэг  
+- Lazy Loading - Сервисүүд зөвхөн шаардлагатай үед үүсгэгдэнэ  
+- Auto-wiring - Dependency-үүдийг автоматаар resolve хийх  
+- Interface Binding - Interface-үүдийг implementation-уудтай холбох  
+- Service Aliases - Нэг сервисийг олон нэрээр авах  
+- Reflection ашиглан автоматаар instance үүсгэнэ  
+- Closure / callable дэмжлэг  
+- Framework-agnostic - Бүх PHP framework-тэй нийцтэй  
+- Ямар ч гадны нэмэлт хамааралгүй
 
 ---
 
@@ -159,9 +159,9 @@ $container->remove(MyService::class);
 
 ### Давуу талууд
 
-- ⚡ **Гүйцэтгэл**: Хүнд сервисүүд зөвхөн шаардлагатай үед үүсгэгдэнэ
-- 💾 **Санах ой**: Ашиглаагүй сервисүүд санах ой эзлэхгүй
-- 🎯 **Оновчтой ашиглалт**: Зөвхөн ашиглаж буй сервисүүд л үүсгэгдэнэ
+- **Гүйцэтгэл**: Хүнд сервисүүд зөвхөн шаардлагатай үед үүсгэгдэнэ
+- **Санах ой**: Ашиглаагүй сервисүүд санах ой эзлэхгүй
+- **Оновчтой ашиглалт**: Зөвхөн ашиглаж буй сервисүүд л үүсгэгдэнэ
 
 ### Хэрхэн ажилладаг
 
@@ -228,9 +228,9 @@ $userService = $container->get(UserService::class);
 ```
 
 **Auto-wiring-ийн давуу талууд:**
-- ⚡ **Хялбар ашиглалт**: Dependency-үүдийг гараар дамжуулах шаардлагагүй
-- 🎯 **Автомат**: Constructor-ын class type hint-ээс автоматаар олдож inject хийгдэнэ
-- 🔄 **Уян хатан**: Хэрэв user аргумент өгсөн бол түүнийг ашиглана (auto-wiring-ээс давуу)
+- **Хялбар ашиглалт**: Dependency-үүдийг гараар дамжуулах шаардлагагүй
+- **Автомат**: Constructor-ын class type hint-ээс автоматаар олдож inject хийгдэнэ
+- **Уян хатан**: Хэрэв user аргумент өгсөн бол түүнийг ашиглана (auto-wiring-ээс давуу)
 
 **Анхаарах зүйлс:**
 - Auto-wiring нь зөвхөн **class type hint**-тэй параметрүүдэд ажиллана
@@ -325,10 +325,10 @@ $logger3 = $container->get('app.logger');
 ```
 
 **Alias-ийн давуу талууд:**
-- 🎯 **Олон нэр**: Нэг сервисийг олон нэрээр авах боломжтой
-- 🔄 **Singleton**: Бүх alias-үүд ижил instance буцаана
-- ✅ **Interface binding**: Interface binding-тэй хамт ажиллана
-- ⚡ **Хялбар**: `alias()` метод ашиглан хялбар бүртгэх
+- **Олон нэр**: Нэг сервисийг олон нэрээр авах боломжтой
+- **Singleton**: Бүх alias-үүд ижил instance буцаана
+- **Interface binding**: Interface binding-тэй хамт ажиллана
+- **Хялбар**: `alias()` метод ашиглан хялбар бүртгэх
 
 **Анхаарах зүйлс:**
 - Alias үүсгэхээсээ өмнө сервис бүртгэгдсэн байх ёстой
@@ -377,9 +377,9 @@ $service = $container->get(UserService::class);
 ```
 
 **Interface Binding-ийн давуу талууд:**
-- 🎯 **Loose Coupling**: Interface ашиглаж implementation-аас хамааралгүй болно
-- 🔄 **Уян хатан**: Implementation-ийг хялбар солих боломжтой
-- ✅ **Auto-wiring**: Auto-wiring-тэй хамт ажиллана
+- **Loose Coupling**: Interface ашиглаж implementation-аас хамааралгүй болно
+- **Уян хатан**: Implementation-ийг хялбар солих боломжтой
+- **Auto-wiring**: Auto-wiring-тэй хамт ажиллана
 
 ---
 
@@ -435,15 +435,15 @@ vendor/bin/phpunit --filter testSetAndGet tests/ContainerTest.php  # Тодор�
 
 ### Тестүүд юу шалгадаг
 
-- ✅ Service бүртгэх, авах үйлдлүүд
-- ✅ Constructor аргументууд дамжуулах
-- ✅ Exception handling
-- ✅ Callable/closure дэмжлэг
-- ✅ Lazy loading (сервис зөвхөн get() дуудагдах үед үүсгэгдэх)
-- ✅ Instance кэшлэлт (singleton behavior)
-- ✅ PSR-11 стандартын нийцтэй байдал
-- ✅ Edge case-үүд (optional parameters, no constructor, гэх мэт)
-- ✅ Integration test-үүд (бодит application сценариуд, dependency chain, service replacement, гэх мэт)
+- Service бүртгэх, авах үйлдлүүд
+- Constructor аргументууд дамжуулах
+- Exception handling
+- Callable/closure дэмжлэг
+- Lazy loading (сервис зөвхөн get() дуудагдах үед үүсгэгдэх)
+- Instance кэшлэлт (singleton behavior)
+- PSR-11 стандартын нийцтэй байдал
+- Edge case-үүд (optional parameters, no constructor, гэх мэт)
+- Integration test-үүд (бодит application сценариуд, dependency chain, service replacement, гэх мэт)
 
 ---
 
@@ -455,10 +455,10 @@ vendor/bin/phpunit --filter testSetAndGet tests/ContainerTest.php  # Тодор�
 
 GitHub Actions workflow нь дараах зүйлсийг гүйцэтгэнэ:
 
-- ✅ **Multi-version PHP тест**: PHP 8.2, 8.3, 8.4 дээр тест ажиллуулна
-- ✅ **Multi-platform тест**: Ubuntu болон Windows дээр тест ажиллуулна
-- ✅ **Code coverage**: Codecov руу coverage тайлан илгээнэ
-- ✅ **Syntax check**: PHP файлуудын синтакс шалгалт
+- **Multi-version PHP тест**: PHP 8.2, 8.3, 8.4 дээр тест ажиллуулна
+- **Multi-platform тест**: Ubuntu болон Windows дээр тест ажиллуулна
+- **Code coverage**: Codecov руу coverage тайлан илгээнэ
+- **Syntax check**: PHP файлуудын синтакс шалгалт
 
 ### CI Status
 

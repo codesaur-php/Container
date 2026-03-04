@@ -736,10 +736,10 @@ $logger2->log('Test message'); // FileLogger instance ашиглана
 
 Энэ контейнер нь PSR-11 стандартыг бүрэн хэрэгжүүлдэг:
 
-- ✅ `ContainerInterface::get()` - Сервис авах
-- ✅ `ContainerInterface::has()` - Сервис байгаа эсэхийг шалгах
-- ✅ `ContainerExceptionInterface` - Ерөнхий алдаа
-- ✅ `NotFoundExceptionInterface` - Олдохгүй алдаа
+- `ContainerInterface::get()` - Сервис авах
+- `ContainerInterface::has()` - Сервис байгаа эсэхийг шалгах
+- `ContainerExceptionInterface` - Ерөнхий алдаа
+- `NotFoundExceptionInterface` - Олдохгүй алдаа
 
 ---
 
@@ -819,9 +819,9 @@ $logger = $container->get(LoggerInterface::class);
 
 ### Давуу Талууд
 
-- 🎯 **Loose Coupling**: Interface ашиглаж implementation-аас хамааралгүй болно
-- 🔄 **Уян хатан**: Implementation-ийг хялбар солих боломжтой
-- ✅ **Auto-wiring**: Auto-wiring-тэй хамт ажиллана
+- **Loose Coupling**: Interface ашиглаж implementation-аас хамааралгүй болно
+- **Уян хатан**: Implementation-ийг хялбар солих боломжтой
+- **Auto-wiring**: Auto-wiring-тэй хамт ажиллана
 
 ### Хязгаарлалтууд
 

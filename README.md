@@ -17,21 +17,21 @@
 
 ### Онцлогууд
 
-- ✔ PSR-11 `ContainerInterface`-ийг хэрэгжүүлдэг  
-- ✔ Lazy Loading - Сервисүүд зөвхөн шаардлагатай үед үүсгэгдэнэ  
-- ✔ Auto-wiring - Dependency-үүдийг автоматаар resolve хийх  
-- ✔ Interface Binding - Interface-үүдийг implementation-уудтай холбох  
-- ✔ Service Aliases - Нэг сервисийг олон нэрээр авах  
-- ✔ Reflection ашиглан автоматаар instance үүсгэнэ  
-- ✔ Closure / callable дэмжлэг  
-- ✔ Framework-agnostic - Бүх PHP framework-тэй нийцтэй  
-- ✔ Ямар ч гадны нэмэлт хамааралгүй
+- PSR-11 `ContainerInterface`-ийг хэрэгжүүлдэг  
+- Lazy Loading - Сервисүүд зөвхөн шаардлагатай үед үүсгэгдэнэ  
+- Auto-wiring - Dependency-үүдийг автоматаар resolve хийх  
+- Interface Binding - Interface-үүдийг implementation-уудтай холбох  
+- Service Aliases - Нэг сервисийг олон нэрээр авах  
+- Reflection ашиглан автоматаар instance үүсгэнэ  
+- Closure / callable дэмжлэг  
+- Framework-agnostic - Бүх PHP framework-тэй нийцтэй  
+- Ямар ч гадны нэмэлт хамааралгүй
 
 ### Дэлгэрэнгүй мэдээлэл
 
-- 📖 [Бүрэн танилцуулга](docs/mn/README.md) - Суурилуулалт, хэрэглээ, жишээнүүд
-- 📚 [API тайлбар](docs/mn/api.md) - Бүх метод, exception-үүдийн тайлбар
-- 🔍 [Код шалгалт](docs/mn/code-review.md) - Код шалгалтын тайлан
+- [Бүрэн танилцуулга](docs/mn/README.md) - Суурилуулалт, хэрэглээ, жишээнүүд
+- [API тайлбар](docs/mn/api.md) - Бүх метод, exception-үүдийн тайлбар
+- [Код шалгалт](docs/mn/code-review.md) - Код шалгалтын тайлан
 
 ---
 
@@ -42,21 +42,21 @@ This package is a component of the **codesaur ecosystem** but can be used indepe
 
 ### Features
 
-- ✔ Implements PSR-11 `ContainerInterface`  
-- ✔ Lazy Loading - Services are created only when needed  
-- ✔ Auto-wiring - Automatic dependency resolution  
-- ✔ Interface Binding - Bind interfaces to implementations  
-- ✔ Service Aliases - Access one service by multiple names  
-- ✔ Automatically creates instances from classes using Reflection  
-- ✔ Closure / callable support  
-- ✔ Framework-agnostic - Compatible with all PHP frameworks  
-- ✔ No external dependencies required
+- Implements PSR-11 `ContainerInterface`  
+- Lazy Loading - Services are created only when needed  
+- Auto-wiring - Automatic dependency resolution  
+- Interface Binding - Bind interfaces to implementations  
+- Service Aliases - Access one service by multiple names  
+- Automatically creates instances from classes using Reflection  
+- Closure / callable support  
+- Framework-agnostic - Compatible with all PHP frameworks  
+- No external dependencies required
 
 ### Documentation
 
-- 📖 [Full Documentation](docs/en/README.md) - Installation, usage, examples
-- 📚 [API Reference](docs/en/api.md) - Complete API documentation
-- 🔍 [Code Review](docs/en/code-review.md) - Code review report
+- [Full Documentation](docs/en/README.md) - Installation, usage, examples
+- [API Reference](docs/en/api.md) - Complete API documentation
+- [Code Review](docs/en/code-review.md) - Code review report
 
 ---
 
@@ -118,12 +118,12 @@ composer test:coverage
 
 ## Changelog
 
-- 📝 [CHANGELOG.md](CHANGELOG.md) - Full version history
+- [CHANGELOG.md](CHANGELOG.md) - Full version history
 
 ## Contributing & Security
 
-- 🤝 [Contributing Guide](.github/CONTRIBUTING.md)
-- 🔐 [Security Policy](.github/SECURITY.md)
+- [Contributing Guide](.github/CONTRIBUTING.md)
+- [Security Policy](.github/SECURITY.md)
 
 ## License
 
@@ -132,7 +132,7 @@ This project is licensed under the MIT License.
 ## Author
 
 **Narankhuu**  
-📧 codesaur@gmail.com  
-🌐 https://github.com/codesaur
+codesaur@gmail.com  
+https://github.com/codesaur
 
-🏗️ **codesaur Ecosystem:** https://codesaur.net
+**codesaur Ecosystem:** https://codesaur.net

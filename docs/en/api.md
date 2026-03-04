@@ -681,10 +681,10 @@ $logger2->log('Test message'); // Uses FileLogger instance
 
 This container fully implements the PSR-11 standard:
 
-- ✅ `ContainerInterface::get()` - Get service
-- ✅ `ContainerInterface::has()` - Check if service exists
-- ✅ `ContainerExceptionInterface` - General error
-- ✅ `NotFoundExceptionInterface` - Not found error
+- `ContainerInterface::get()` - Get service
+- `ContainerInterface::has()` - Check if service exists
+- `ContainerExceptionInterface` - General error
+- `NotFoundExceptionInterface` - Not found error
 
 ---
 
@@ -730,9 +730,9 @@ $userService = $container->get(UserService::class);
 
 ### Benefits
 
-- ⚡ **Easy to use**: No need to manually pass dependencies
-- 🎯 **Automatic**: Automatically resolves and injects from class type hints
-- 🔄 **Flexible**: User-provided arguments take precedence over auto-wiring
+- **Easy to use**: No need to manually pass dependencies
+- **Automatic**: Automatically resolves and injects from class type hints
+- **Flexible**: User-provided arguments take precedence over auto-wiring
 
 ### Notes
 
