@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [3.1.3] - 2026-03-05
+[3.1.3]: https://github.com/codesaur-php/Container/compare/v3.1.2...v3.1.3
+
+### Fixed
+- Removed trailing whitespace in CHANGELOG.md and docs/mn/README.md
+- Fixed double blank line in docs/mn/code-review.md
+- Fixed remaining Mongolian heading capitalization inconsistencies in docs/mn/api.md and docs/mn/code-review.md
+
+---
+
 ## [3.1.2] - 2026-03-04
 [3.1.2]: https://github.com/codesaur-php/Container/compare/v3.1.1...v3.1.2
 
