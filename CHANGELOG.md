@@ -23,7 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Added initial release (v1.0) information to changelog
-  
+
 ### Fixed
 - Fixed small documentation errors and inconsistencies
 

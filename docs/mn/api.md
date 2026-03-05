@@ -817,7 +817,7 @@ $container->set(FileLogger::class, ['/var/log/app.log']);
 $logger = $container->get(LoggerInterface::class);
 ```
 
-### Давуу Талууд
+### Давуу талууд
 
 - **Loose Coupling**: Interface ашиглаж implementation-аас хамааралгүй болно
 - **Уян хатан**: Implementation-ийг хялбар солих боломжтой

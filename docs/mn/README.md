@@ -495,4 +495,4 @@ CI дээр ажиллаж буй тестүүдийг локал дээр аж�
 ## Зохиогч
 
 **Narankhuu**  
-https://github.com/codesaur  
+https://github.com/codesaur
