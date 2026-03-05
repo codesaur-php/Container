@@ -1,6 +1,6 @@
 # Contributing to codesaur/container
 
-First of all, thank you for taking the time to contribute️  
+First of all, thank you for taking the time to contribute  
 Contributions of any kind are welcome.
 
 ---
