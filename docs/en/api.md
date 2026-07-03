@@ -161,7 +161,7 @@ public function set(string $name, mixed $definition = []): void
 #### Throws
 
 - **`NotFoundException`** - If class does not exist
-- **`ContainerException`** - On duplicate registration
+- **`ContainerException`** - On duplicate registration or when the class is not instantiable (abstract / private constructor)
 
 #### Description
 
@@ -170,6 +170,7 @@ Lazy loading: Service is not created now, only the definition is stored. Instanc
 **Notes:**
 - `$name` parameter must be a **class name** (for callable, any string is allowed)
 - Throws `NotFoundException` if class does not exist
+- Non-instantiable classes (abstract or private constructor) are rejected
 - Duplicate registration is prohibited
 - Uses ReflectionClass to create instance with constructor arguments (when `get()` is called)
 
@@ -343,7 +344,7 @@ public function bind(string $interface, string $implementation): void
 #### Throws
 
 - **`NotFoundException`** - If class does not exist
-- **`ContainerException`** - If class does not implement interface or duplicate binding
+- **`ContainerException`** - If class does not implement interface, is not instantiable, or duplicate binding
 
 #### Description
 

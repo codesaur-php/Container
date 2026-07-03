@@ -35,6 +35,5 @@
         "test": "phpunit",
         "test:coverage": "phpunit --coverage-text"
     },
-    "license": "MIT",
-    "minimum-stability": "dev"
+    "license": "MIT"
 }

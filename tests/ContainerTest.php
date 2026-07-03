@@ -686,12 +686,60 @@ class ContainerTest extends TestCase
         // Бодит сервис хэвээр байна
         $this->assertTrue($this->container->has(SimpleClass::class));
     }
+
+    /**
+     * Test set() throws ContainerException for abstract class
+     */
+    public function testSetThrowsContainerExceptionForAbstractClass(): void
+    {
+        $this->expectException(ContainerException::class);
+        $this->expectExceptionMessage(AbstractService::class . ' class is not instantiable');
+
+        $this->container->set(AbstractService::class);
+    }
+
+    /**
+     * Test set() throws ContainerException for class with private constructor
+     */
+    public function testSetThrowsContainerExceptionForPrivateConstructor(): void
+    {
+        $this->expectException(ContainerException::class);
+        $this->expectExceptionMessage(ClassWithPrivateConstructor::class . ' class is not instantiable');
+
+        $this->container->set(ClassWithPrivateConstructor::class);
+    }
+
+    /**
+     * Test bind() throws ContainerException for abstract implementation
+     */
+    public function testBindThrowsContainerExceptionForAbstractImplementation(): void
+    {
+        $this->expectException(ContainerException::class);
+        $this->expectExceptionMessage(AbstractLogger::class . ' class is not instantiable');
+
+        $this->container->bind(LoggerInterface::class, AbstractLogger::class);
+    }
 }
 
 /**
  * Test helper classes
  */
 class SimpleClass
+{
+}
+
+abstract class AbstractService
+{
+}
+
+class ClassWithPrivateConstructor
+{
+    private function __construct()
+    {
+    }
+}
+
+abstract class AbstractLogger implements LoggerInterface
 {
 }
 

@@ -161,7 +161,7 @@ public function set(string $name, mixed $definition = []): void
 #### Throws
 
 - **`NotFoundException`** - Класс байхгүй бол
-- **`ContainerException`** - Давхар бүртгэх үед
+- **`ContainerException`** - Давхар бүртгэх болон instance үүсгэх боломжгүй (abstract / private constructor) класс бүртгэх үед
 
 #### Description
 
@@ -172,6 +172,7 @@ Lazy loading: Сервис одоо үүсгэгдэхгүй, зөвхөн то�
 **Анхаарах зүйлс:**
 - `$name` параметр нь заавал **класс нэр** байх ёстой (callable-ийн хувьд аль ч string байж болно)
 - Класс байхгүй бол `NotFoundException` шиднэ
+- Instance үүсгэх боломжгүй (abstract, private constructor) классыг хориглоно
 - Давхар бүртгэхийг хориглоно
 - ReflectionClass ашиглаж constructor-ын аргументуудаар instance үүсгэнэ (`get()` дуудагдах үед)
 - Auto-wiring: Constructor-ын class type hint-тэй параметрүүдэд container-ээс автоматаар dependency inject хийгдэнэ
@@ -346,7 +347,7 @@ public function bind(string $interface, string $implementation): void
 #### Throws
 
 - **`NotFoundException`** - Interface эсвэл implementation байхгүй бол
-- **`ContainerException`** - Implementation нь interface-ийг хэрэгжүүлэхгүй эсвэл давхар binding хийх үед
+- **`ContainerException`** - Implementation нь interface-ийг хэрэгжүүлэхгүй, instance үүсгэх боломжгүй эсвэл давхар binding хийх үед
 
 #### Description
 

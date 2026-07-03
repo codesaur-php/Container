@@ -7,6 +7,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [3.2.0] - 2026-07-03
+[3.2.0]: https://github.com/codesaur-php/Container/compare/v3.1.3...v3.2.0
+
+### Added
+- `set()` and `bind()` now reject non-instantiable classes (abstract or private constructor) early with a clear `ContainerException` - previously such registrations succeeded and later failed on `get()` with a raw PHP `Error`
+- Tests covering abstract class and private constructor rejection
+
+### Changed
+- Added native `array` type declarations to all `Container` properties (`$definitions`, `$instances`, `$bindings`, `$aliases`)
+- Added `mixed` return type declaration to `Container::get()`
+- Removed pointless `ARRAY_FILTER_USE_BOTH` flag from the alias cleanup in `remove()` (the callback only uses the value)
+- Removed personal phone number from the author metadata in `composer.json`
+- Removed `minimum-stability: dev` from `composer.json` - it is a root-only field with no effect on package consumers, and it was causing local dev installs to pull unstable dev-master builds of every dependency instead of stable releases
+- Bumped `actions/checkout` from v4 to v6 in the CI workflow
+- Documented the new non-instantiable class validation in `docs/en/api.md` and `docs/mn/api.md`
+
+---
+
 ## [3.1.3] - 2026-03-05
 [3.1.3]: https://github.com/codesaur-php/Container/compare/v3.1.2...v3.1.3
 

@@ -35,7 +35,7 @@ class Container implements ContainerInterface
      *
      * @var array<string, mixed>
      */
-    protected $definitions = [];
+    protected array $definitions = [];
 
     /**
      * Үүсгэгдсэн instance-үүдийн кэш.
@@ -43,7 +43,7 @@ class Container implements ContainerInterface
      *
      * @var array<string, mixed>
      */
-    protected $instances = [];
+    protected array $instances = [];
 
     /**
      * Interface-үүдийг implementation-уудтай холбосон binding-үүд.
@@ -51,7 +51,7 @@ class Container implements ContainerInterface
      *
      * @var array<string, string>
      */
-    protected $bindings = [];
+    protected array $bindings = [];
 
     /**
      * Сервисүүдийн alias-үүд.
@@ -59,7 +59,7 @@ class Container implements ContainerInterface
      *
      * @var array<string, string>
      */
-    protected $aliases = [];
+    protected array $aliases = [];
 
     /**
      * ID нэрээр сервис авах.
@@ -72,7 +72,7 @@ class Container implements ContainerInterface
      *
      * @throws NotFoundException   Сервис олдохгүй бол
      */
-    public function get(string $name)
+    public function get(string $name): mixed
     {
         // Alias байвал бодит нэрийг авах
         $aliasResolvedName = $this->resolveAlias($name);
@@ -151,6 +151,8 @@ class Container implements ContainerInterface
      * Анхаарах зүйлс:
      * - $name параметр нь заавал <b>класс нэр</b> байх ёстой (callable-ийн хувьд аль ч string байж болно).
      * - Класс байхгүй бол NotFoundException шиднэ.
+     * - Instance үүсгэх боломжгүй (abstract эсвэл private constructor-той)
+     *   классыг бүртгэхийг хориглоно.
      * - Давхар бүртгэхийг хориглоно.
      * - ReflectionClass ашиглаж constructor-ын аргументуудаар instance үүсгэнэ (get() дуудагдах үед).
      *
@@ -158,7 +160,7 @@ class Container implements ContainerInterface
      * @param mixed  $definition  Класс үүсгэх constructor аргументууд (array) эсвэл callable Closure
      *
      * @throws NotFoundException     Класс байхгүй бол
-     * @throws ContainerException    Давхар бүртгэх үед
+     * @throws ContainerException    Давхар бүртгэх болон instance үүсгэх боломжгүй класс бүртгэх үед
      *
      * @return void
      */
@@ -172,17 +174,24 @@ class Container implements ContainerInterface
             $this->definitions[$name] = $definition;
             return;
         }
-    
+
         // Класс байхгүй бол алдаа
         if (!\class_exists($name)) {
             throw new NotFoundException($name . ' class does not exist');
         }
-        
+
+        // Instance үүсгэх боломжгүй (abstract, private constructor) классыг
+        // эрт шатанд нь хориглоно - эс бөгөөс get() дуудагдах үед
+        // ойлгомжгүй Error гарна
+        if (!(new ReflectionClass($name))->isInstantiable()) {
+            throw new ContainerException($name . ' class is not instantiable');
+        }
+
         // Давхар бүртгэхийг хориглох
         if ($this->has($name)) {
             throw new ContainerException(__CLASS__ . ' already contains entry named [' . $name . ']');
         }
-        
+
         // Тодорхойлолтыг хадгална (lazy loading - одоо instance үүсгэхгүй)
         $this->definitions[$name] = $definition;
     }
@@ -225,7 +234,7 @@ class Container implements ContainerInterface
         // Бүх alias-үүдийг шалгаж устгах (энэ сервис рүү чиглэсэн)
         $this->aliases = \array_filter($this->aliases, function($target) use ($finalName) {
             return $target !== $finalName;
-        }, \ARRAY_FILTER_USE_BOTH);
+        });
         
         // Бодит сервис устгах
         if (isset($this->definitions[$finalName])) {
@@ -339,6 +348,12 @@ class Container implements ContainerInterface
             throw new ContainerException(
                 $implementation . ' does not implement interface ' . $interface
             );
+        }
+
+        // Instance үүсгэх боломжгүй (abstract, private constructor)
+        // implementation-ийг хориглоно
+        if (!$reflector->isInstantiable()) {
+            throw new ContainerException($implementation . ' class is not instantiable');
         }
         
         // Давхар binding хийхийг хориглох
